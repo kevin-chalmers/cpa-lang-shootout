@@ -41,3 +41,11 @@ Thumbs.db
 bin/
 build/
 extern/
+
+# Erlang #
+##########
+.eunit
+deps
+*.beam
+*.plt
+erl_crash.dump
