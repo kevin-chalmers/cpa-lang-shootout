@@ -1,5 +1,5 @@
 -module(commstime).
--export([commstime/1, printer/0, delta/0, succ/0, prefix/1]).
+-export([start/0, commstime/1, printer/0, delta/0, succ/0, prefix/1]).
 
 id(Out) ->
   receive N -> Out ! N end,
@@ -45,3 +45,6 @@ commstime(N) ->
   Delta ! {Printer, Succ},
   Pre ! Delta,
   Succ ! Pre.
+
+start() ->
+  commstime(0).
