@@ -1,0 +1,8 @@
+[package]
+name = "test-cpa"
+version = "0.1.0"
+authors = ["kevin"]
+[[bin]]
+name = "test-cpa"
+path = "src/test-cpa.rs"
+[dependencies]
