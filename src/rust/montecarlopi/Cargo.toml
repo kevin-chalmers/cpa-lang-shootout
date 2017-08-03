@@ -7,4 +7,4 @@ name = "montecarlopi"
 path = "src/main.rs"
 [dependencies]
 time = "0.1.36"
-
+rand = "0.3"

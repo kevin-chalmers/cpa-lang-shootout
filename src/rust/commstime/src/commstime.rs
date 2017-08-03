@@ -60,8 +60,8 @@ fn main() {
     let (b_tx, b_rx) = mpsc::sync_channel(0);
     let (c_tx, c_rx) = mpsc::sync_channel(0);
     let (d_tx, d_rx) = mpsc::sync_channel(0);
-    let p = thread::spawn(move || { prefix(0, a_rx, b_tx); });
-    let d = thread::spawn(move || { delta(b_rx, c_tx, d_tx); });
-    let s = thread::spawn(move || { succ(c_rx, a_tx); });
+    let p = thread::spawn(|| { prefix(0, a_rx, b_tx); });
+    let d = thread::spawn(|| { delta(b_rx, c_tx, d_tx); });
+    let s = thread::spawn(|| { succ(c_rx, a_tx); });
     consume(d_rx);
 }
