@@ -1,0 +1,1 @@
+{"rustc":10792176054895046608,"features":"[]","target":16540386791766241527,"profile":731176819336294830,"deps":[["time v0.1.38",9899035484870821155]],"local":[{"MtimeBased":[[1502024297,258940799],"/home/kevin/cpa-lang-shootout/src/rust/stressedselect/target/debug/.fingerprint/stressedselect-132ce2b785080878/dep-bin-stressedselect-132ce2b785080878"]}],"rustflags":[]}

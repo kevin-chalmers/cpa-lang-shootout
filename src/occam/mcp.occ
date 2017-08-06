@@ -1,0 +1,46 @@
+#INCLUDE "course.module"
+
+PROC monte.carlo.pi(VAL INT iterations, CHAN REAL64 to.master!)
+  INT in_cirlce:
+  RANDOM.STATE state:
+  REAL64 x, y:
+  SEQ
+    in.cirle := 0
+    random.init.from.time(state)
+    SEQ count = 0 FOR iterations
+      SEQ
+        x, state := random.real32(1.0, state)
+        y, state := random.real32(1.0, state)
+        IF
+          (x * x) + (y * y) <= 1.0
+            in.circle := in_cirlce + 1
+          TRUE
+            SKIP
+    CLAIM to.master!
+      to.master ! (4.0 * REAL64(in_circle)) / REAL64(iterations)
+:
+
+PROC experiment(VAL INT iterations, workers)
+  SHARED CHAN REAL64 c:
+  REAL64 pi, tmp:
+  SEQ index = 0 FOR 100
+    PAR
+      monte.carlo.pi(iterations/workers, c)
+      SEQ
+        pi := 0.0
+        SEQ i = 0 FOR workers
+          SEQ
+            c ? tmp
+            pi := pi + tmp
+:
+
+PROC main(CHAN BYTE kyb?, scr!, err!)
+  INT iterations:
+  SEQ
+    iterations := INT(POWER(2.0, 24.0))
+    experiment(iterations, 1)
+    experiment(iterations, 2)
+    experiment(iterations, 4)
+    experiment(iterations, 8)
+    experiment(iterations, 16)
+:
