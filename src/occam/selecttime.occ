@@ -1,0 +1,56 @@
+#INCLUDE "course.module"
+#INCLUDE "maths.module"
+
+DATA TYPE PACKET
+  RECORD
+    INT writer:
+    INT n:
+:
+
+PROC writer(CHAN PACKET out!, VAL INT writer, VAL INT writes)
+  PACKET p:
+  SEQ i = 0 FOR writes
+    SEQ
+      p[writer] := writer
+      p[n] := i
+      out ! p
+:
+
+PROC reader(CHAN BYTE out!, [8]CHAN PACKET in?, VAL INT total)
+  TIMER tim:
+  INT t0, t1, millisecs:
+  PACKET p:
+  SEQ
+    tim ? t0
+    SEQ count = 0 FOR total
+      SEQ
+        IF
+          (count \ 65536) = 0
+            SEQ
+              tim ? t1
+              millisecs := t1 - t0
+              out.int(millisecs, 0, out)
+              out.string("*n", 0, out)
+              tim ? t0
+          TRUE
+            SKIP
+        ALT k = 0 FOR 8
+          in[k] ? p
+            SKIP
+:
+
+PROC experiment(VAL INT iterations, procs, CHAN BYTE out!)
+  [8]CHAN PACKET chans:
+  PAR
+    PAR i = 0 FOR 8
+      writer(chans[i], i, iterations / procs)
+    reader(out, chans, iterations)
+:
+
+PROC select.time(CHAN BYTE kyb?, screen!, err!)
+  INT iterations:
+  SEQ
+    iterations := INT TRUNC POWER(2.0, 24.0)
+    experiment(iterations, 8, screen)
+:
+

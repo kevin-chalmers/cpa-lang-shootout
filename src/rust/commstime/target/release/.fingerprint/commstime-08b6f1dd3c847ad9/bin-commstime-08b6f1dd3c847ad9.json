@@ -1,0 +1,1 @@
+{"rustc":7235541707153916886,"features":"[]","target":16917683721377883939,"profile":8410117760005530537,"deps":[["time v0.1.36",11367303616222113990]],"local":[{"MtimeBased":[[1502293050,850548286],"/home/kevin/cpa-lang-shootout/src/rust/commstime/target/release/.fingerprint/commstime-08b6f1dd3c847ad9/dep-bin-commstime-08b6f1dd3c847ad9"]}],"rustflags":[]}

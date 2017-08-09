@@ -1,46 +1,60 @@
 #INCLUDE "course.module"
+#INCLUDE "maths.module"
+#INCLUDE "random.module"
 
-PROC monte.carlo.pi(VAL INT iterations, CHAN REAL64 to.master!)
-  INT in_cirlce:
+PROC monte.carlo.pi(VAL INT iterations, SHARED CHAN REAL64 to.master!)
+  INT in.circle:
   RANDOM.STATE state:
-  REAL64 x, y:
+  REAL32 x, y:
+  REAL64 in.circle.real:
+  REAL64 iterations.real:
   SEQ
-    in.cirle := 0
+    in.circle := 0
     random.init.from.time(state)
     SEQ count = 0 FOR iterations
       SEQ
         x, state := random.real32(1.0, state)
         y, state := random.real32(1.0, state)
         IF
-          (x * x) + (y * y) <= 1.0
-            in.circle := in_cirlce + 1
+          ((x * x) + (y * y)) <= 1.0
+            in.circle := in.circle + 1
           TRUE
             SKIP
+    in.circle.real := REAL64 ROUND in.circle
+    iterations.real := REAL64 ROUND iterations
     CLAIM to.master!
-      to.master ! (4.0 * REAL64(in_circle)) / REAL64(iterations)
+      to.master ! (4.0 * in.circle.real) / iterations.real
 :
 
-PROC experiment(VAL INT iterations, workers)
+PROC experiment(VAL INT iterations, workers, CHAN BYTE out!)
   SHARED CHAN REAL64 c:
   REAL64 pi, tmp:
+  TIMER tim:
+  INT t0, t1:
   SEQ index = 0 FOR 100
-    PAR
-      monte.carlo.pi(iterations/workers, c)
-      SEQ
-        pi := 0.0
-        SEQ i = 0 FOR workers
-          SEQ
-            c ? tmp
-            pi := pi + tmp
+    SEQ
+      tim ? t0
+      PAR
+        PAR i = 0 FOR workers
+          monte.carlo.pi((iterations/workers), c!)
+        SEQ
+          pi := 0.0
+          SEQ i = 0 FOR workers
+            SEQ
+              CLAIM c?
+                c ? tmp
+              pi := pi + tmp
+          pi := pi / (REAL64 ROUND workers)
+          tim ? t1
+          t1 := t1 - t0
+          out.int(t1, 0, out)
+          out.string("*n", 0, out)
+          tim ? t0
 :
 
 PROC main(CHAN BYTE kyb?, scr!, err!)
   INT iterations:
   SEQ
-    iterations := INT(POWER(2.0, 24.0))
-    experiment(iterations, 1)
-    experiment(iterations, 2)
-    experiment(iterations, 4)
-    experiment(iterations, 8)
-    experiment(iterations, 16)
+    iterations := INT TRUNC POWER(2.0, 24.0)
+    experiment(iterations, 8, scr)
 :
