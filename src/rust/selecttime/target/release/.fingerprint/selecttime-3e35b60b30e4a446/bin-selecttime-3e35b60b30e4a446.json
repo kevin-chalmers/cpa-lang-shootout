@@ -1,0 +1,1 @@
+{"rustc":7235541707153916886,"features":"[]","target":7688855746601113022,"profile":8410117760005530537,"deps":[["time v0.1.38",5647414871847507162]],"local":[{"MtimeBased":[[1502293197,559591671],"/home/kevin/cpa-lang-shootout/src/rust/selecttime/target/release/.fingerprint/selecttime-3e35b60b30e4a446/dep-bin-selecttime-3e35b60b30e4a446"]}],"rustflags":[]}
