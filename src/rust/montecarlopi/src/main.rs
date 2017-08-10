@@ -29,10 +29,11 @@ fn experiment(iterations : i32, threads : i32) {
     let (c_tx, c_rx) = mpsc::sync_channel(0);
     for i in 0..100 {
         let start = time::precise_time_ns();
-        let mut vec = Vec::new();
+        //let mut vec = Vec::new();
         for _ in 0..threads {
             let child_tx = c_tx.clone();
-            vec.push(thread::spawn(move || {montecarlopi(iterations / threads, child_tx); }));
+            thread::spawn(move || {montecarlopi(iterations / threads, child_tx); });
+            //vec.push(thread::spawn(move || {montecarlopi(iterations / threads, child_tx); }));
         }
         let mut pi = 0.;
         for _ in 0..threads {
