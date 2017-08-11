@@ -1,0 +1,74 @@
+#INCLUDE "course.module"
+#INCLUDE "maths.module"
+#INCLUDE "random.module"
+
+VAL INT N.WARMUP.RESCHEDULES IS 1000000:   -- trick for heuristics
+
+VAL INT N.ITERATIONS IS 1<<24:             -- was INT TRUNC POWER(2.0, 24.0), i.e. 1<<24
+VAL INT N.REPEATS IS 100:                    -- was 100
+VAL INT N.WORKERS IS 8:                  -- was 8 (set to 1 for serial time)
+
+PROC reschedule (VAL INT n)                -- trick for heuristics
+  SEQ i = 0 FOR n
+    RESCHEDULE ()
+:
+
+PROC monte.carlo.pi(VAL INT iterations, SHARED CHAN REAL64 to.master!)
+  INT in.circle:
+  RANDOM.STATE state:
+  REAL32 x, y:
+  REAL64 in.circle.real:
+  REAL64 iterations.real:
+  SEQ
+    reschedule (N.WARMUP.RESCHEDULES)      -- trick for heuristics
+    in.circle := 0
+    random.init.from.time(state)
+    SEQ count = 0 FOR iterations
+      SEQ
+        x, state := random.real32(1.0, state)
+        y, state := random.real32(1.0, state)
+        IF
+          ((x * x) + (y * y)) <= 1.0
+            in.circle := in.circle + 1
+          TRUE
+            SKIP
+    in.circle.real := REAL64 ROUND in.circle
+    iterations.real := REAL64 ROUND iterations
+    CLAIM to.master!
+      to.master ! (4.0 * in.circle.real) / iterations.real
+:
+
+PROC experiment(VAL INT iterations, workers, CHAN BYTE out!)
+  SHARED CHAN REAL64 c:
+  REAL64 pi, tmp:
+  TIMER tim:
+  INT t0, t1:
+  SEQ index = 0 FOR N.REPEATS
+    SEQ
+      tim ? t0
+      PAR
+        PAR i = 0 FOR workers
+          monte.carlo.pi((iterations/workers), c!)
+        SEQ
+          pi := 0.0
+          SEQ i = 0 FOR workers
+            SEQ
+              CLAIM c?
+                c ? tmp
+              pi := pi + tmp
+          pi := pi / (REAL64 ROUND workers)
+          tim ? t1
+          t1 := t1 - t0
+          out.int(t1, 0, out)
+          out.string("*n", 0, out)
+          tim ? t0
+:
+
+-- PROC main(CHAN BYTE kyb?, scr!, err!)
+PROC main(CHAN BYTE scr!)
+  -- INT iterations:
+  SEQ
+    -- iterations := INT TRUNC POWER(2.0, 24.0)
+    -- experiment(iterations, 8, scr)
+    experiment(N.ITERATIONS, N.WORKERS, scr!)
+:
