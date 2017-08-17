@@ -1,9 +1,0 @@
-[package]
-name = "selecttime"
-version = "0.1.0"
-authors = ["Kevin Chalmers <k.chalmers@napier.ac.uk>"]
-[[bin]]
-name = "selecttime"
-path = "src/main.rs"
-[dependencies]
-time = "0.1.36"

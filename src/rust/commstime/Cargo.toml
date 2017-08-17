@@ -1,9 +1,0 @@
-[package]
-name = "commstime"
-version = "0.1.0"
-authors = ["Kevin Chalmers <k.chalmers@napier.ac.uk>"]
-[[bin]]
-name = "commstime"
-path = "src/commstime.rs"
-[dependencies]
-time = "0.1.36"

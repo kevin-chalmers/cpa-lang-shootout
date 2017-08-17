@@ -1,3 +1,6 @@
+// Author: Kevin Chalmers
+// Date: 17/08/2017
+
 package main
 
 import (
@@ -8,6 +11,7 @@ import (
 	"time"
 )
 
+// montecarlopi estimates pi based on random point selection.
 func montecarlopi(iterations int, master chan float64) {
 	s := rand.NewSource(time.Now().UnixNano())
 	r := rand.New(s)
@@ -22,6 +26,7 @@ func montecarlopi(iterations int, master chan float64) {
 	master <- (4.0 * float64(in_circle)) / float64(iterations)
 }
 
+// experiment runs a monte carlo pi experiment for a number of threads.
 func experiment(iterations int, threads int) {
 	f, err := os.Create(fmt.Sprintf("mcp-go-%d.csv", threads))
 	if err != nil {

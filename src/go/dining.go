@@ -1,3 +1,6 @@
+// Author: Kevin Chalmers
+// Date: 17/08/2017
+
 package main
 
 import (
