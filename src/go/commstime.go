@@ -1,9 +1,13 @@
+// Author: Kevin Chalmers
+// Date: 17/08/2017
+
 package main
 
 import "fmt"
 import "time"
 import "os"
 
+// id sends on out whatever is received on in.
 func id(in chan int, out chan int, count int) {
 	for index := 0; index < count; index++ {
 		x := <-in
@@ -11,11 +15,14 @@ func id(in chan int, out chan int, count int) {
 	}
 }
 
+// prefix outputs N, then behaves as id.
 func prefix(N int, in chan int, out chan int, count int) {
 	out <- N
 	id(in, out, count)
 }
 
+// printer reads in 10000 values and calculates the time taken.  Results are
+// stored in ct-go.csv.
 func printer(in chan int, count int) {
 	var results [100]int64
 	start := time.Now()
@@ -42,6 +49,7 @@ func printer(in chan int, count int) {
 	}
 }
 
+// succ reads a value from in, increments it, and outputs on out.
 func succ(in chan int, out chan int, count int) {
 	for index := 0; index < count; index++ {
 		x := <-in
@@ -49,6 +57,7 @@ func succ(in chan int, out chan int, count int) {
 	}
 }
 
+// delta reads from in, then outputs on out0 then out1.
 func delta(in chan int, out0 chan int, out1 chan int, count int) {
 	for index := 0; index < count; index++ {
 		x := <-in
