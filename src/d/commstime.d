@@ -1,5 +1,6 @@
 import std.stdio;
 import std.concurrency;
+import std.datetime;
 import core.thread;
 
 void id(Tid output, int count)
@@ -42,21 +43,39 @@ void succ(int count)
 
 void printer(int count)
 {
+    StopWatch sw;
+    long[100] results;
+    sw.start();
+    int value = 0;
     for (int i = 0; i < count; ++i)
     {
-        int value = receiveOnly!int();
-        writeln(value);
+        if (i % 10000 == 0 && i > 0)
+        {
+            sw.stop();
+            results[i / 10000] = sw.peek.nsecs() / 10000;
+            writeln(results[i / 10000]);
+            sw.reset();
+            sw.start();
+        }
+        value = receiveOnly!int();
     }
+    File file = File("ct-d.csv", "w");
+    for (int i = 0; i < 100; ++i)
+    {
+        file.writeln(results[i]);
+    }
+    file.close();
 }
 
 void main()
 {
-    Tid delta = spawn(&delta, 10000);
-    Tid succ = spawn(&succ, 10000);
-    Tid pre = spawn(&prefix, 0, 10000);
+    int iterations = 1000000;
+    Tid delta = spawn(&delta, iterations);
+    Tid succ = spawn(&succ, iterations);
+    Tid pre = spawn(&prefix, 0, iterations);
     delta.send(thisTid);
     delta.send(succ);
     pre.send(delta);
     succ.send(pre);
-    printer(10000);
+    printer(iterations);
 }
