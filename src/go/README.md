@@ -152,3 +152,7 @@ func worker(out chan int, wg WaitGroup) {
     wg.Done()
 }
 ```
+
+## Compilation Process and Runtime Environment
+
+Go code is converted into binary code and can run as a standalone executable.  The Go code can also be run directly from the command line using the ```go``` command.  There is no virtual machine, and everything runs directly on the machine.

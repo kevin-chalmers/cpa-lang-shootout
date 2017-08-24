@@ -99,3 +99,7 @@ do_work(Timeout_ms) ->
         Timeout_ms -> do_less_work()
     end.
 ```
+
+## Compilation Process and Runtime Environment
+
+Erlang code runs within the Beam Virtual Machine.  The code is normally compiled and loaded from within a Read-Evaluated-Print Loop environment, although code can be compiled from the command line.
