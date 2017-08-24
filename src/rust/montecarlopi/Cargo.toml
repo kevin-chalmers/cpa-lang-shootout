@@ -1,0 +1,10 @@
+[package]
+name = "montecarlopi"
+version = "0.1.0"
+authors = ["Kevin Chalmers <k.chalmers@napier.ac.uk>"]
+[[bin]]
+name = "montecarlopi"
+path = "src/main.rs"
+[dependencies]
+time = "0.1.36"
+rand = "0.3"
