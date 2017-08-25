@@ -236,3 +236,7 @@ PROC worker(CHAN INT out!, BARRIER bar)
     SYNC bar
 :
 ```
+
+## Compilation Process and Runtime Environment
+
+occam-&pi; code can be compiled to a number of different targets.  The Transtepreter will execute code in a virtual machine, whereas building for the local system will produce an executable that is built using the Kent CCSP library and runtime.  It therefore executes on the local machine.

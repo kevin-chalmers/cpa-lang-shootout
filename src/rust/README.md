@@ -110,3 +110,7 @@ fn worker(out : Sender<i32>, bar : Barrier) {
     bar.wait()
 }
 ```
+
+## Compilation Process and Runtime Environment
+
+Rust code is compiled into binary code that will execute on the target operating system and can run as a standalone executable.  There is no virtual machine and everything runs on the machine.
