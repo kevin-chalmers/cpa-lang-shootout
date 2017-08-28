@@ -49,3 +49,11 @@ deps
 *.beam
 *.plt
 erl_crash.dump
+
+# Ada #
+#######
+# Object file
+*.o
+
+# Ada Library Information
+*.ali
