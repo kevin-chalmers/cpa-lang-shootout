@@ -135,6 +135,59 @@ Language selection criteria:
 
 If you have to download a seperate library, or write your own functions, to achieve message-passing then the criteria does not allow the language to be included.  Future work will examine library support, but as numerous examples exist this is currently outside the scope of this work.
 
+## Language Timeline
+
+This section indicates when languages where released.  The aim is to illustrate any clusters of development.
+
+1972. (3) Concurrent Pascal, Prolog, Smalltalk
+1973. (1) Standard ML (as ML)
+1974. (0)
+1975. (0)
+1976. (0)
+1977. (0)
+1978. (0)
+1979. (0)
+1980. (0)
+1981. (0)
+1982. (1) SIGNAL
+1983. (4) Ada, Esterel, occam, SISAL
+1984. (0)
+1985. (0)
+1986. (3) Eiffel, Erlang, LabVIEW
+1987. (1) Perl
+1988. (2) Object REXX, Tcl
+1989. (1) SequenceL
+1990. (2) Haskell, J
+1991. (1) Oz
+1992. (1) &#x3bc;C++
+1993. (2) Lua, SuperPascal
+1994. (2) Newsquek, Racket
+1995. (2) Limbo, Ruby
+1996. (1) Ocaml
+1997. (1) E
+1998. (0)
+1999. (1) SystemC
+2000. (2) Hume, Join Java
+2001. (4) CAL Actor Language, D, SALSA, SpecC
+2002. (1) Io
+2003. (4) C&omega;, ChucK, Falcon, Go!
+2004. (1) Scala
+2005. (2) Neko, XC
+2006. (2) AmbientTalk, Sequoia++
+2007. (2) Clojure, Dodo
+2008. (2) Nim, PREESM
+2009. (3) Axum, Go, ProcessJ
+2010. (1) Rust
+2011. (3) Aha!, Elixir, Red
+2012. (1) Julia
+2013. (1) Zonnon
+2014. (3) Oforth, Pony, Swift
+2015. (2) Panda, Perl 6
+2016. (1) Fantom
+2017.
+
+Unknown - Ateji PX, C=, Concurrent ML, Fancy, FortranM, JoCaml, MPD, Mythryl, SR, Unicon, Vorpal, Wren, Zkl
+
 ## Additional References
 
 There are a few sites which provide useful information on programming languages:
