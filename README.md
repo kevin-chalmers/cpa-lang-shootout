@@ -54,7 +54,7 @@ The benchmarks are described in the appendix below.
 If you want to help, feel free to pull the repository, implement the benchmarks, undertake the evaluation, and make a pull request.  At present, the following languages have been identified as potentially having message-passing concurrency support in the language or via the languages standard libraries.
 
 * [Ada](https://en.wikipedia.org/wiki/Ada_(programming_language)) - the typical install is [GNAT](http://libre.adacore.com/).
-* [Aha!](http://www.ahafactor.net/language).
+* [Aha!](http://www.ahafactor.net/language) - seems to have disappeared.
 * [AmbientTalk](https://en.wikipedia.org/wiki/AmbientTalk) - instructions available [here](http://soft.vub.ac.be/amop/).
 * [Ateji PX](https://en.wikipedia.org/wiki/Ateji_PX) - seems to be unavailable now.
 * [Axum](https://en.wikipedia.org/wiki/Axum_(programming_language)) - but looks like this is [closed](https://msdn.microsoft.com/en-us/devlabs/dd795202.aspx).
