@@ -63,6 +63,7 @@ If you want to help, feel free to pull the repository, implement the benchmarks,
 * [CAL Actor Language](https://en.wikipedia.org/wiki/CAL_Actor_Language) - tricky to find an implementation.  Try [here](http://orcc.sourceforge.net/).
 * [Chuck](https://en.wikipedia.org/wiki/ChucK) - instructions available [here](http://chuck.cs.princeton.edu/).
 * [Clojure](https://en.wikipedia.org/wiki/Clojure) - instructions available [here](https://clojure.org/).
+* [Coarray Fortran](https://en.wikipedia.org/wiki/Coarray_Fortran) - need to check viability.
 * [Concurrent Pascal](https://en.wikipedia.org/wiki/Concurrent_Pascal) - although it might be a stretch saying this is live.  A compiler for microcontrollers is available [here](https://github.com/dhawk/concurrent-pascal-compiler).
 * [D](https://en.wikipedia.org/wiki/D_(programming_language)) - instructions available [here](https://dlang.org/).
 * [Dodo](http://dodo.sourceforge.net/)
@@ -81,6 +82,7 @@ If you want to help, feel free to pull the repository, implement the benchmarks,
 * [J](https://en.wikipedia.org/wiki/J_(programming_language)) - instructions available [here](http://www.jsoftware.com/).
 * [JoCaml](https://en.wikipedia.org/wiki/JoCaml) - instructions available [here](http://jocaml.inria.fr/).
 * [Join Java](https://en.wikipedia.org/wiki/Join_Java) - appears to have been a PhD project.  Try [here](http://joinjava.unisa.edu.au/).
+* [Joule](https://en.wikipedia.org/wiki/Joule_(programming_language)) - not sure if still relevant.
 * [Julia](https://en.wikipedia.org/wiki/Julia_(programming_language)) - instructions available [here](https://julialang.org/).
 * [LabVIEW](https://en.wikipedia.org/wiki/LabVIEW) - might be stretching the definition though.  Instructions available [here](http://www.ni.com/en-gb/shop/labview.html).
 * [Limbo](https://en.wikipedia.org/wiki/Limbo_(programming_language)) - instructions available [here](http://www.vitanuova.com/inferno/limbo.html).
@@ -93,7 +95,9 @@ If you want to help, feel free to pull the repository, implement the benchmarks,
 * [OCaml](https://en.wikipedia.org/wiki/OCaml) - instructions available [here](http://ocaml.org/).
 * [Oforth](http://www.oforth.com/)
 * [Open Object Rexx](https://en.wikipedia.org/wiki/Object_REXX) - instructions available [here](http://www.oorexx.org/).
+* [Orc](https://en.wikipedia.org/wiki/Orc_(programming_language)) - looks interesting.
 * [Oz](https://en.wikipedia.org/wiki/Oz_(programming_language)) - the best approach seems to be via [Mozart](http://mozart.github.io/).
+* [P](https://github.com/p-org/P) - Microsoft research language.  Seems interesting.
 * [Panda](https://panda-lang.org/)
 * [Perl](https://en.wikipedia.org/wiki/Perl) - although I think this may be via OS process communication.  Instructions available [here](https://www.perl.org/).
 * [Perl 6](https://en.wikipedia.org/wiki/Perl_6) - although see comment on Perl.  Instructions available [here](https://perl6.org/).
@@ -119,6 +123,7 @@ If you want to help, feel free to pull the repository, implement the benchmarks,
 * [SystemC](https://en.wikipedia.org/wiki/SystemC) - but looks like this is no longer available.  [Official website](http://systemc.org/).
 * [Tcl](https://en.wikipedia.org/wiki/Tcl) - instructions available [here](http://www.tcl.tk/).
 * [Unicon](https://en.wikipedia.org/wiki/Unicon_(programming_language)) - instructions available [here](https://unicon.sourceforge.io/).
+* [Unified Parallel C](https://en.wikipedia.org/wiki/Unified_Parallel_C) - may fit the criteria.
 * [Vorpal](http://vmlanguages.is-research.de/vorpal/) - seems to have become [Clump](http://d.plaindoux.free.fr/clump/).
 * [Wren](http://wren.io/)
 * [XC](https://en.wikipedia.org/wiki/XC_(programming_language)) - although unsure if this will work on a general PC.  There is an open source [XCore project](https://github.com/xcore).
