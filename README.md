@@ -57,6 +57,7 @@ If you want to help, feel free to pull the repository, implement the benchmarks,
 * [Aha!](http://www.ahafactor.net/language) - seems to have disappeared.
 * [AmbientTalk](https://en.wikipedia.org/wiki/AmbientTalk) - instructions available [here](http://soft.vub.ac.be/amop/).
 * [Ateji PX](https://en.wikipedia.org/wiki/Ateji_PX) - seems to be unavailable now.
+* [Averst](https://en.wikipedia.org/wiki/Averest) - looks very interesting.
 * [Axum](https://en.wikipedia.org/wiki/Axum_(programming_language)) - but looks like this is [closed](https://msdn.microsoft.com/en-us/devlabs/dd795202.aspx).
 * [C=](http://www.hoopoesnest.com/cstripes/cstripes-sketch.htm) - although unsure how easy it is to communicate between concurrent components.
 * [C&omega;](https://en.wikipedia.org/wiki/C%CF%89) - Microsoft Research [page](https://www.microsoft.com/en-us/research/project/comega/?from=http%3A%2F%2Fresearch.microsoft.com%2Fcomega%2F).  Might not be suitable.
