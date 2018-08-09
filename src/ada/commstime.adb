@@ -2,10 +2,15 @@ with Ada.Text_IO;
 use Ada.Text_IO;
 with Ada.Integer_Text_IO;
 use Ada.Integer_Text_IO;
+with Ada.Text_IO.Text_Streams;
+use Ada.Text_IO.Text_Streams;
 with Ada.Real_Time;
 use Ada.Real_Time;
 
 procedure CommsTime is
+
+Experiments : CONSTANT INTEGER := 100;
+Iterations_Experiment : CONSTANT INTEGER := 10000;
 
 task PREFIX is
     entry Send(Value : in INTEGER);
@@ -26,35 +31,43 @@ end PRINTER;
 task body PREFIX is
     N : INTEGER;
 begin
-    SEQ_DELTA.Send(0);
-    loop
-        accept Send(Value : in INTEGER) do
-            N := Value;
-        end;
-        SEQ_DELTA.Send(N);
+    for i in 0..Experiments loop
+        SEQ_DELTA.Send(0);
+        for i in 0..Iterations_Experiment loop
+            accept Send(Value : in INTEGER) do
+                N := Value;
+            end;
+            SEQ_DELTA.Send(N);
+        end loop;
+        -- Accept last value in
+        accept Send(Value : in INTEGER);
     end loop;
 end PREFIX;
 
 task body SEQ_DELTA is
     N : INTEGER;
 begin
-    loop
-        accept Send(Value : in INTEGER) do
-            N := Value;
-        end;
-        PRINTER.Send(Value => N);
-        SUCC.Send(Value => N);
+    for i in 0..Experiments loop
+        for i in 0..Iterations_Experiment loop
+            accept Send(Value : in INTEGER) do
+                N := Value;
+            end;
+            PRINTER.Send(Value => N);
+            SUCC.Send(Value => N);
+        end loop;
     end loop;
 end SEQ_DELTA;
 
 task body SUCC is
     N : INTEGER;
 begin
-    loop
-        accept Send(Value : in INTEGER) do
-            N := Value;
-        end;
-        PREFIX.Send(N + 1);
+    for i in 0..Experiments loop
+        for i in 0..Iterations_Experiment loop
+            accept Send(Value : in INTEGER) do
+                N := Value;
+            end;
+            PREFIX.Send(N + 1);
+        end loop;
     end loop;
 end SUCC;
 
@@ -62,21 +75,28 @@ task body PRINTER is
     N : INTEGER;
     Start : Time;
     Total : Time_Span;
+    Results : File_Type;
 begin
-    for i in 0 .. 100 loop
+    Create(File => Results, Mode => Out_File, Name => "commstime_ada.csv");
+    for i in 0..Experiments loop
         Start := Clock;
-        for j in 0 .. 10000 loop
+        for j in 0..Iterations_Experiment loop
             accept Send(Value : in INTEGER) do
                 N := Value;
             end;
         end loop;
         -- Divide by iterations, then convert to nanos.
         -- Four communications.
-        Total := (((Clock - Start) / 10000) * 1000000000) / 4;
+        Total := (((Clock - Start) / Iterations_Experiment) * 1000000000) / 4;
         Put_Line(Duration'Image(To_Duration(Total)));
+        
+        -- ***** TODO HERE - fix file i/o for results *****
+        
+        --Float'Write(Results, Duration'Image(To_Duration(Total)));
     end loop;
+    Close(Results);
 end PRINTER;
 
 begin
-    Put_Line("This is an example of use of a task type");
+    Put_Line("Communication Time Benchmark");
 end CommsTime;
