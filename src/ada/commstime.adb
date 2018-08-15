@@ -4,11 +4,16 @@ with Ada.Integer_Text_IO;
 use Ada.Integer_Text_IO;
 with Ada.Text_IO.Text_Streams;
 use Ada.Text_IO.Text_Streams;
+with Ada.Text_IO.Unbounded_IO;
+use Ada.Text_IO.Unbounded_IO;
 with Ada.Real_Time;
 use Ada.Real_Time;
 
 procedure CommsTime is
 
+-- Parameters for the experimental run.
+-- Experiments - number of data points collected
+-- Iterations_Experiment - number of cycles round commstime for a single data point
 Experiments : CONSTANT INTEGER := 100;
 Iterations_Experiment : CONSTANT INTEGER := 10000;
 
@@ -88,11 +93,8 @@ begin
         -- Divide by iterations, then convert to nanos.
         -- Four communications.
         Total := (((Clock - Start) / Iterations_Experiment) * 1000000000) / 4;
-        Put_Line(Duration'Image(To_Duration(Total)));
-        
-        -- ***** TODO HERE - fix file i/o for results *****
-        
-        --Float'Write(Results, Duration'Image(To_Duration(Total)));
+        Put_Line(results, Float'Image(Float(To_Duration(Total))));
+        Put(".");
     end loop;
     Close(Results);
 end PRINTER;
