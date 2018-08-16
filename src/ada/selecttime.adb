@@ -11,15 +11,28 @@ use Ada.Real_Time;
 
 procedure SelectTime is
 
+Number_Writers : CONSTANT INTEGER := 1;
+
 type Stressed_Packet is record
     Writer : INTEGER;
     N : INTEGER;
 end record;
 
-task Writer is
+task type Writer;
+
+task body Writer is
 begin
     Put_Line("Writer");
 end Writer;
+
+task Reader is
+    entry Send(NATURAL)(Value : in Stressed_Packet);
+end Reader;
+
+task body Reader is
+begin
+    Put_Line("Reader");
+end Reader;
 
 begin
     Put_Line("Select Time Benchmark");

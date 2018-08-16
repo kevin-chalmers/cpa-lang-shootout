@@ -30,7 +30,7 @@ Ada is an interesting language, in that it has a similar model to actors (send m
 
 Communication between tasks in Ada are synchronous, involved in what is termed at rendezvous during communication.  ```accept``` statements and matching calls cause rendezvous to occur.
 
-```
+```ada
 task Receiver is
     entry Send(Value : INTEGER);
 end Receiver;
@@ -54,7 +54,7 @@ end Sender;
 
 An Ada task can be defined as a type and instances created, or it can just be defined.  The following illustrates a task being allocated to a variable.
 
-```
+```ada
 task type My_Task is
     -- some entry definitions
 end My_Task;
@@ -71,7 +71,7 @@ T : My_Task; -- variable of type My_Task.
 
 Ada tasks can be sent during rendezvous if the ```entry``` has defined as such.
 
-```
+```ada
 task type Sender is
     entry OK;
 end Sender;
@@ -106,7 +106,7 @@ end;
 
 This is a weird definition, but meets the general principle.  As Ada provides first-order processes, and Ada also provides arrays, and furthermore that tasks are started when they are instantiated, a form of indexed parallel execution is available, although none blocking on creation.
 
-```
+```ada
 task type My_Task is
 end My_Task;
 
