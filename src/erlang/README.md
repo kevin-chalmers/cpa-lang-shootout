@@ -66,7 +66,7 @@ As Erlang is a functional programming language values are not referenced between
 
 The lack of selection on messages is replaced by selection on incoming values in Erlang.  The incoming values that are selectable on are limited to user defined atoms, and the selection is more a form of pattern matching than a choice.
 
-```
+```erlang
 do_work() ->
   receive
     a -> %% do some work,
@@ -78,7 +78,7 @@ do_work() ->
 
 Erlang does allow guarded behaviour on selected incoming values.
 
-```
+```erlang
 guarded() ->
     receive
         N when N > 42 -> do_work_a();
@@ -91,7 +91,7 @@ guarded() ->
 
 The ```after``` option in a ```receive``` statement to have a timeout.
 
-```
+```erlang
 do_work(Timeout_ms) ->
     receive
         N -> do_more_work()
