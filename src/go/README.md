@@ -13,6 +13,7 @@ Information was gathered by building the closest equivalent to a release build i
 ```go build -ldflags "-s -w" <filename>```
 
 The benchmarks provided are:
+
 * [Communication Time](commstime.go)
 * [Selection Time](selecttime.go)
 * [Monte Carlo &pi;](montecarlopi.go)
@@ -155,4 +156,4 @@ func worker(out chan int, wg WaitGroup) {
 
 ## Compilation Process and Runtime Environment
 
-Go code is converted into binary code and can run as a standalone executable.  The Go code can also be run directly from the command line using the ```go``` command.  There is no virtual machine, and everything runs directly on the machine.
+Go code is converted into binary code and can run as a standalone executable.  The Go code can also be run directly from the command line using the ```go``` command.  There is no virtual machine, and everything runs directly on the host machine.
