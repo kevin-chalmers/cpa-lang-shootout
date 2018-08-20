@@ -52,7 +52,7 @@ The lack of first-order channels in Erlang is replaced by first-class processes.
 
 Erlang supports the communication of any type to a process's mailbox, including process IDs.  In fact, this is a common mechanism to allow communication networks to be set up.
 
-```
+```erlang
 A = spawn(...),
 B = spawn(...),
 A ! B.
