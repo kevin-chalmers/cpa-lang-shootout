@@ -121,7 +121,6 @@ procedure experiment(writers : INTEGER) is
 begin
     Reader_Task := new Reader(writers);
     for i in 1..writers loop
-        Put_Line("=>" & Integer'Image(i));
         writer_tasks(i) := new Writer(i, Iterations / writers);
     end loop;
 end experiment;
