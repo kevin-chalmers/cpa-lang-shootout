@@ -34,10 +34,11 @@ One of the aims of this work is the building of a classification for message-pas
 
 The languages currently evaluated are:
 
-* [Erlang](src/erlang/README.md)
-* [Go](src/go/README.md)
-* [Rust](src/rust/README.md)
-* [occam-_&pi;_](src/occam/README.md)
+- [Ada](src/ada/)
+- [Erlang](src/erlang/)
+- [Go](src/go/)
+- [occam-_&pi;_](src/occam/)
+- [Rust](src/rust/)
 
 ## Benchmark Results
 
@@ -51,15 +52,15 @@ The benchmarks are described in the appendix below.
 
 ## Contributing to the Evaluation
 
-If you want to help, feel free to pull the repository, implement the benchmarks, undertake the evaluation, and make a pull request.  At present, the following languages have been identified as potentially having message-passing concurrency support in the language or via the languages standard libraries.
+If you want to help, feel free to pull the repository, implement the benchmarks, undertake the evaluation, and make a pull request.  At present, the following languages have been identified as potentially having message-passing concurrency support in the language or via the language's standard libraries.
 
 * [Ada](https://en.wikipedia.org/wiki/Ada_(programming_language)) - the typical install is [GNAT](http://libre.adacore.com/).
 * [Aha!](http://www.ahafactor.net/language).  Appears to be unavailable now.
-* [AmbientTalk](https://en.wikipedia.org/wiki/AmbientTalk) - instructions available [here](http://soft.vub.ac.be/amop/).
+* [AmbientTalk](https://en.wikipedia.org/wiki/AmbientTalk) - instructions available [here](http://soft.vub.ac.be/amop/).  On analysis, AmbientTalk does not meet criteria 2 (the message must be sent in a manner so that the receiver can __choose__ when to receive it; therefore, giving the receiver control over its internal state).  This is because messages are essentially asynchronous method calls on actors, not a communication that the actor can decide when to engage in.
 * [Ateji PX](https://en.wikipedia.org/wiki/Ateji_PX) - seems to be unavailable now.
 * [Axum](https://en.wikipedia.org/wiki/Axum_(programming_language)) - but looks like this is [closed](https://msdn.microsoft.com/en-us/devlabs/dd795202.aspx).
-* [C=](http://www.hoopoesnest.com/cstripes/cstripes-sketch.htm) - although unsure how easy it is to communicate between concurrent components.
-* [C&omega;](https://en.wikipedia.org/wiki/C%CF%89) - Microsoft Research [page](https://www.microsoft.com/en-us/research/project/comega/?from=http%3A%2F%2Fresearch.microsoft.com%2Fcomega%2F).  Might not be suitable.
+* [C=](http://www.hoopoesnest.com/cstripes/cstripes-sketch.htm) - although unsure how easy it is to communicate between concurrent components.  Appears to be unavailable now.
+* [C&omega;](https://en.wikipedia.org/wiki/C%CF%89) - Microsoft Research [page](https://www.microsoft.com/en-us/research/project/comega/?from=http%3A%2F%2Fresearch.microsoft.com%2Fcomega%2F).  Might not be suitable.  After some investigation, C&omega; became the [Joins Concurrency Library](https://en.wikipedia.org/wiki/Joins_(concurrency_library)) for .NET, although this is not a standard library and therefore does not meet the criteria.  A C&omega; compiler can be downloaded, but it requires .NET 1.1, which is no longer supported.  Thus, C&omega; has been discounted from the list.
 * [CAL Actor Language](https://en.wikipedia.org/wiki/CAL_Actor_Language) - tricky to find an implementation.  Try [here](http://orcc.sourceforge.net/).
 * [Chuck](https://en.wikipedia.org/wiki/ChucK) - instructions available [here](http://chuck.cs.princeton.edu/).
 * [Clojure](https://en.wikipedia.org/wiki/Clojure) - instructions available [here](https://clojure.org/).
