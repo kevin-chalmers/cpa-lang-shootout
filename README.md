@@ -130,6 +130,7 @@ If you want to help, feel free to pull the repository, implement the benchmarks,
 Not all of these languages may support message-passing concurrency, as only a quick overview has been made.  Languages may also be missing.  If you know of a language missed please get in touch.  Also, to be included a current implementation of the language is required.  There are historic languages with message-passing concurrency, but seem to be unavailable today.  For comparison purposes, the language must run on Linux.
 
 Language selection criteria:
+
 * the language __must__ provide mechanisms to send a message between components as part of the core language features (e.g., keyword support and/or standard library) and not via an additional library.
 * the message must be sent in a manner so that the receiver can __choose__ when to receive it; therefore, giving the receiver control over its internal state.  A method invocation on an object is therefore not a message.
 * messages __must__ be any structured data type supported in the language.  Conversion to bytes, strings, or another data serialization technique is __not__ considered message-passing.
@@ -185,7 +186,8 @@ This section indicates when languages where released.  The aim is to illustrate 
 2014. (3) Oforth, Pony, Swift
 2015. (2) Panda, Perl 6
 2016. (1) Fantom
-2017.
+2017. (0)
+2018. (0)
 
 Unknown - Ateji PX, C=, Concurrent ML, Fancy, FortranM, JoCaml, MPD, Mythryl, SR, Unicon, Vorpal, Wren, Zkl
 
@@ -203,6 +205,7 @@ There are a few sites which provide useful information on programming languages:
 ## Properties
 
 The properties taken from process calculi are:
+
 * __Synchronous communication__ - do communicating components wait until they are both ready to complete a communication.
 * __First-order channels__ - does the language have a channel construct.
 * __Higher-order channels__ - can channels send channels.
@@ -230,6 +233,7 @@ At present, three benchmarks have been used.
 ### Communication Time
 
 This benchmark measures the communication / coordination time of a message.  Four processes are involved:
+
 * __Prefix__ outputs 0, then outputs what it inputs.
 * __Delta__ outputs its input on two channels sequentially.
 * __Successor__ increments its input before output.
