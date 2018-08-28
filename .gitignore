@@ -58,3 +58,5 @@ erl_crash.dump
 # Ada Library Information
 *.ali
 *.csv
+
+\.vscode/

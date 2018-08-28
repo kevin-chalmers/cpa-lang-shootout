@@ -28,17 +28,18 @@ A description of these features is provided in the appendix below.
 
 One of the aims of this work is the building of a classification for message-passing concurrent languages.  The hope is that an understanding of common features and different approaches can be made by investigating the approaches to message-passing concurrency.  At present, the classification is limited as only a handful of languages have been examined.  The current classification is below:
 
-
+`TODO`
 
 ## Current Languages
 
 The languages currently evaluated are:
 
-- [Ada](src/ada/)
-- [Erlang](src/erlang/)
-- [Go](src/go/)
-- [occam-_&pi;_](src/occam/)
-- [Rust](src/rust/)
+* [Ada](src/ada/)
+* [ChucK](src/chuck/)
+* [Erlang](src/erlang/)
+* [Go](src/go/)
+* [occam-_&pi;_](src/occam/)
+* [Rust](src/rust/)
 
 ## Benchmark Results
 
@@ -62,7 +63,7 @@ If you want to help, feel free to pull the repository, implement the benchmarks,
 * [C=](http://www.hoopoesnest.com/cstripes/cstripes-sketch.htm) - although unsure how easy it is to communicate between concurrent components.  Appears to be unavailable now.
 * [C&omega;](https://en.wikipedia.org/wiki/C%CF%89) - Microsoft Research [page](https://www.microsoft.com/en-us/research/project/comega/?from=http%3A%2F%2Fresearch.microsoft.com%2Fcomega%2F).  Might not be suitable.  After some investigation, C&omega; became the [Joins Concurrency Library](https://en.wikipedia.org/wiki/Joins_(concurrency_library)) for .NET, although this is not a standard library and therefore does not meet the criteria.  A C&omega; compiler can be downloaded, but it requires .NET 1.1, which is no longer supported.  Thus, C&omega; has been discounted from the list.
 * [CAL Actor Language](https://en.wikipedia.org/wiki/CAL_Actor_Language) - tricky to find an implementation.  Try [here](http://orcc.sourceforge.net/).
-* [Chuck](https://en.wikipedia.org/wiki/ChucK) - instructions available [here](http://chuck.cs.princeton.edu/).
+* [ChucK](https://en.wikipedia.org/wiki/ChucK) - instructions available [here](http://chuck.cs.princeton.edu/).  ChucK looked promising but the scheduler (or shreduler) does not support a communication loop, nor selection, so two key benchmarks are not possible.  An alaysis of the language is provided.
 * [Clojure](https://en.wikipedia.org/wiki/Clojure) - instructions available [here](https://clojure.org/).
 * [Concurrent Pascal](https://en.wikipedia.org/wiki/Concurrent_Pascal) - although it might be a stretch saying this is live.  A compiler for microcontrollers is available [here](https://github.com/dhawk/concurrent-pascal-compiler).
 * [D](https://en.wikipedia.org/wiki/D_(programming_language)) - instructions available [here](https://dlang.org/).
