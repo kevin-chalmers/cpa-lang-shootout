@@ -22,7 +22,7 @@ Communication and selection benchmarks are not possible in ChucK.  The parallel 
 | Parallel execution statement              | no        |
 | Indexed parallel execution statement      | no        |
 | State ownership                           | no        |
-| Process ownership                         | yes       |
+| Process ownership                         | partial   |
 | Selection on incoming messages            | no        |
 | Indexed selection                         | no        |
 | Selection based on incoming value         | no        |
@@ -53,6 +53,66 @@ me.yield();
 ```
 
 ### First-order Channels
+
+ChucK uses events which act like channels insofar as an `Event` can be extended to include data:
+
+```chuck
+class Int_Chan extends Event
+{
+    int value;
+}
+
+Int_Chan a;
+
+// Send a message
+5 => a.value();
+a.signal();
+...
+// Receive a message
+a => now;
+a.value => local;
+```
+
+### Higher-order Channels
+
+ChucK events can contain other events.  References have to be used as we are sending objects rather than primitive data.
+
+```chuck
+class Int_Chan extends Event
+{
+    int value;
+}
+
+class Chan_Chan extends Event
+{
+    Int_Chan value;
+}
+
+Chan_Chan a;
+// Set the value of a
+Int_Chan b @=> a.value;
+a.signal();
+...
+// Get the value from a
+a => now;
+a.value @=> Int_Chan @ c;
+```
+
+### First-order Processes
+
+A `spork` operation returns a type `Shred` which can be stored in a variable.
+
+```chuck
+spork ~proc() @=> Shred s;
+```
+
+### Higher-order Processes
+
+As a `Shred` is a class type it can be contained in an `Event` just as an `Event` can.
+
+### Process Ownership
+
+There is an implicit parent-child relationship between Shreds.  However, a child `Shred` will terminate when its parent `Shred` does.  A parent does not wait for its children to complete.  As the definition of process ownership is that the parent waits for its children to complete this is only a partial meeting of the requirements.
 
 ## Compilation Process and Runtime Environment
 
