@@ -41,6 +41,16 @@ The languages currently evaluated are:
 * [occam-_&pi;_](src/occam/)
 * [Rust](src/rust/)
 
+Languages that have so far been discounted are:
+
+* Aha!
+* AmbientTalk
+* Ateji PX
+* Axum
+* C=
+* C&omega;
+* Concurrent Pascal, although SuperPascal may allow a similar analysis.
+
 ## Benchmark Results
 
 There are currently three benchmark applications:
@@ -63,14 +73,14 @@ If you want to help, feel free to pull the repository, implement the benchmarks,
 * [C=](http://www.hoopoesnest.com/cstripes/cstripes-sketch.htm) - although unsure how easy it is to communicate between concurrent components.  Appears to be unavailable now.
 * [C&omega;](https://en.wikipedia.org/wiki/C%CF%89) - Microsoft Research [page](https://www.microsoft.com/en-us/research/project/comega/?from=http%3A%2F%2Fresearch.microsoft.com%2Fcomega%2F).  Might not be suitable.  After some investigation, C&omega; became the [Joins Concurrency Library](https://en.wikipedia.org/wiki/Joins_(concurrency_library)) for .NET, although this is not a standard library and therefore does not meet the criteria.  A C&omega; compiler can be downloaded, but it requires .NET 1.1, which is no longer supported.  Thus, C&omega; has been discounted from the list.
 * [CAL Actor Language](https://en.wikipedia.org/wiki/CAL_Actor_Language) - tricky to find an implementation.  Try [here](http://orcc.sourceforge.net/).
-* [ChucK](https://en.wikipedia.org/wiki/ChucK) - instructions available [here](http://chuck.cs.princeton.edu/).  ChucK looked promising but the scheduler (or shreduler) does not support a communication loop, nor selection, so two key benchmarks are not possible.  An alaysis of the language is provided.
-* [Clojure](https://en.wikipedia.org/wiki/Clojure) - instructions available [here](https://clojure.org/).
-* [Concurrent Pascal](https://en.wikipedia.org/wiki/Concurrent_Pascal) - although it might be a stretch saying this is live.  A compiler for microcontrollers is available [here](https://github.com/dhawk/concurrent-pascal-compiler).
+* [ChucK](https://en.wikipedia.org/wiki/ChucK) - instructions available [here](http://chuck.cs.princeton.edu/).  ChucK looked promising but the scheduler (or shreduler) does not support a communication loop, nor selection, so two key benchmarks are not possible.  An analysis of the language is provided.
+* [Clojure](https://en.wikipedia.org/wiki/Clojure) - instructions available [here](https://clojure.org/).  At present this does not seem to meet the criteria.  The `agents` package provides simple agents that respond to function calls but have no control over their state.  The `core.async` package does provide the functionality, but it is not core Clojure and therefore does not meet criteria 1.
+* [Concurrent Pascal](https://en.wikipedia.org/wiki/Concurrent_Pascal) - although it might be a stretch saying this is live.  A compiler for microcontrollers is available [here](https://github.com/dhawk/concurrent-pascal-compiler).  After some investigation it appears that Concurrent Pascal is not available.  No version exists that can be executed on a Linux desktop.
 * [D](https://en.wikipedia.org/wiki/D_(programming_language)) - instructions available [here](https://dlang.org/).
 * [Dodo](http://dodo.sourceforge.net/)
 * [E](https://en.wikipedia.org/wiki/E_(programming_language)) - instructions available [here](http://erights.org/).
 * [Eiffel](https://en.wikipedia.org/wiki/Eiffel_(programming_language)) - a good starting point is probably [Eiffel Software](https://www.eiffel.com/).  Concurrency seems to be provided via [SCOOP](https://www.eiffel.org/doc/solutions/Concurrent%20programming%20with%20SCOOP) but unclear if message passing is available.
-* [Elixir](https://en.wikipedia.org/wiki/Elixir_(programming_language)) (althougth this is really just Erlang) - instructions available [here](https://elixir-lang.org/).
+* [Elixir](https://en.wikipedia.org/wiki/Elixir_(programming_language)) (although this is really just Erlang) - instructions available [here](https://elixir-lang.org/).
 * [Esterel](https://en.wikipedia.org/wiki/Esterel) - instructions available [here](http://www.esterel.org/).
 * [Falcon](https://en.wikipedia.org/wiki/Falcon_(programming_language)) - instructions available [here](http://falconpl.org/).
 * [Fantom](https://en.wikipedia.org/wiki/Fantom_(programming_language)) (although this does run on-top of other runtimes) - instructions available [here](http://www.fantom.org/).
@@ -81,6 +91,7 @@ If you want to help, feel free to pull the repository, implement the benchmarks,
 * [Go!](https://en.wikipedia.org/wiki/Go!_(programming_language)) (not to be confused with Go) - instructions available [here](https://github.com/frankmccabe/go).
 * [Io](https://en.wikipedia.org/wiki/Io_(programming_language)) - instructions available [here](http://iolanguage.org/).
 * [J](https://en.wikipedia.org/wiki/J_(programming_language)) - instructions available [here](http://www.jsoftware.com/).
+* [Java](https://en.wikipedia.org/wiki/Java_(programming_language)) - the [`SynchronousQueue`](https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/SynchronousQueue.html) is part of the standard Java API and provides a synchronous channel like construct.
 * [JoCaml](https://en.wikipedia.org/wiki/JoCaml) - instructions available [here](http://jocaml.inria.fr/).
 * [Join Java](https://en.wikipedia.org/wiki/Join_Java) - appears to have been a PhD project.  Try [here](http://joinjava.unisa.edu.au/).
 * [Julia](https://en.wikipedia.org/wiki/Julia_(programming_language)) - instructions available [here](https://julialang.org/).
@@ -116,7 +127,7 @@ If you want to help, feel free to pull the repository, implement the benchmarks,
 * [SpecC](https://en.wikipedia.org/wiki/SpecC) - a reference compiler can be found via [here](http://www.cecs.uci.edu/~specc/).
 * [SR](https://en.wikipedia.org/wiki/SR_(programming_language)) - looks like it is no longer maintained.  Try [here](https://www2.cs.arizona.edu/sr/).
 * [Standard ML](https://en.wikipedia.org/wiki/Standard_ML) - but most likely [ConcurrentML](https://en.wikipedia.org/wiki/Concurrent_ML).  Try [here](http://cml.cs.uchicago.edu/).
-* [SuperPascal](https://en.wikipedia.org/wiki/SuperPascal) - unlikely to be still possible, but try [here](http://brinch-hansen.net/).
+* [SuperPascal](https://en.wikipedia.org/wiki/SuperPascal) - unlikely to be still possible, but try [here](http://brinch-hansen.net/) and [here](https://github.com/octonion/superpascal).
 * [Swift](https://en.wikipedia.org/wiki/Swift_(programming_language)) (via Grand Central Dispatch) - Swift is [available for Linux](https://swift.org/download/).
 * [SystemC](https://en.wikipedia.org/wiki/SystemC) - but looks like this is no longer available.  [Official website](http://systemc.org/).
 * [Tcl](https://en.wikipedia.org/wiki/Tcl) - instructions available [here](http://www.tcl.tk/).
@@ -134,9 +145,10 @@ Language selection criteria:
 
 * the language __must__ provide mechanisms to send a message between components as part of the core language features (e.g., keyword support and/or standard library) and not via an additional library.
 * the message must be sent in a manner so that the receiver can __choose__ when to receive it; therefore, giving the receiver control over its internal state.  A method invocation on an object is therefore not a message.
-* messages __must__ be any structured data type supported in the language.  Conversion to bytes, strings, or another data serialization technique is __not__ considered message-passing.
+* the receiver __must__ be able to wait __passively__ for a message to be received - that is, a busy spinning on a value to change is not a message.  Having a queue between threads that a receiver tests for readiness is not suitable.
+* messages __must__ be any structured data type supported in the language.  Conversion to bytes, strings, or another data serialization technique is __not__ considered message-passing.  Nor is any use of I/O mechanisms to simulate communication.
 
-If you have to download a seperate library, or write your own functions, to achieve message-passing then the criteria does not allow the language to be included.  Future work will examine library support, but as numerous examples exist this is currently outside the scope of this work.
+If you have to download a separate library, or write your own functions, to achieve message-passing then the criteria does not allow the language to be included.  Future work will examine library support, but as numerous examples exist this is currently outside the scope of this work.
 
 ## Language Timeline
 
@@ -165,7 +177,7 @@ This section indicates when languages where released.  The aim is to illustrate 
 1992. (1) &#x3bc;C++
 1993. (2) Lua, SuperPascal
 1994. (2) Newsquek, Racket
-1995. (2) Limbo, Ruby
+1995. (2) Limbo, Ruby, Java
 1996. (1) Ocaml
 1997. (1) E
 1998. (0)
