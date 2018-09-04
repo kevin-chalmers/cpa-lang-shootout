@@ -28,16 +28,18 @@ A description of these features is provided in the appendix below.
 
 One of the aims of this work is the building of a classification for message-passing concurrent languages.  The hope is that an understanding of common features and different approaches can be made by investigating the approaches to message-passing concurrency.  At present, the classification is limited as only a handful of languages have been examined.  The current classification is below:
 
-
+`TODO`
 
 ## Current Languages
 
 The languages currently evaluated are:
 
-* [Erlang](src/erlang/README.md)
-* [Go](src/go/README.md)
-* [Rust](src/rust/README.md)
-* [occam-_&pi;_](src/occam/README.md)
+* [Ada](src/ada/)
+* [ChucK](src/chuck/)
+* [Erlang](src/erlang/)
+* [Go](src/go/)
+* [occam-_&pi;_](src/occam/)
+* [Rust](src/rust/)
 
 ## Benchmark Results
 
@@ -51,17 +53,17 @@ The benchmarks are described in the appendix below.
 
 ## Contributing to the Evaluation
 
-If you want to help, feel free to pull the repository, implement the benchmarks, undertake the evaluation, and make a pull request.  At present, the following languages have been identified as potentially having message-passing concurrency support in the language or via the languages standard libraries.
+If you want to help, feel free to pull the repository, implement the benchmarks, undertake the evaluation, and make a pull request.  At present, the following languages have been identified as potentially having message-passing concurrency support in the language or via the language's standard libraries.
 
 * [Ada](https://en.wikipedia.org/wiki/Ada_(programming_language)) - the typical install is [GNAT](http://libre.adacore.com/).
-* [Aha!](http://www.ahafactor.net/language).
-* [AmbientTalk](https://en.wikipedia.org/wiki/AmbientTalk) - instructions available [here](http://soft.vub.ac.be/amop/).
+* [Aha!](http://www.ahafactor.net/language).  Appears to be unavailable now.
+* [AmbientTalk](https://en.wikipedia.org/wiki/AmbientTalk) - instructions available [here](http://soft.vub.ac.be/amop/).  On analysis, AmbientTalk does not meet criteria 2 (the message must be sent in a manner so that the receiver can __choose__ when to receive it; therefore, giving the receiver control over its internal state).  This is because messages are essentially asynchronous method calls on actors, not a communication that the actor can decide when to engage in.
 * [Ateji PX](https://en.wikipedia.org/wiki/Ateji_PX) - seems to be unavailable now.
 * [Axum](https://en.wikipedia.org/wiki/Axum_(programming_language)) - but looks like this is [closed](https://msdn.microsoft.com/en-us/devlabs/dd795202.aspx).
-* [C=](http://www.hoopoesnest.com/cstripes/cstripes-sketch.htm) - although unsure how easy it is to communicate between concurrent components.
-* [C&omega;](https://en.wikipedia.org/wiki/C%CF%89) - Microsoft Research [page](https://www.microsoft.com/en-us/research/project/comega/?from=http%3A%2F%2Fresearch.microsoft.com%2Fcomega%2F).  Might not be suitable.
+* [C=](http://www.hoopoesnest.com/cstripes/cstripes-sketch.htm) - although unsure how easy it is to communicate between concurrent components.  Appears to be unavailable now.
+* [C&omega;](https://en.wikipedia.org/wiki/C%CF%89) - Microsoft Research [page](https://www.microsoft.com/en-us/research/project/comega/?from=http%3A%2F%2Fresearch.microsoft.com%2Fcomega%2F).  Might not be suitable.  After some investigation, C&omega; became the [Joins Concurrency Library](https://en.wikipedia.org/wiki/Joins_(concurrency_library)) for .NET, although this is not a standard library and therefore does not meet the criteria.  A C&omega; compiler can be downloaded, but it requires .NET 1.1, which is no longer supported.  Thus, C&omega; has been discounted from the list.
 * [CAL Actor Language](https://en.wikipedia.org/wiki/CAL_Actor_Language) - tricky to find an implementation.  Try [here](http://orcc.sourceforge.net/).
-* [Chuck](https://en.wikipedia.org/wiki/ChucK) - instructions available [here](http://chuck.cs.princeton.edu/).
+* [ChucK](https://en.wikipedia.org/wiki/ChucK) - instructions available [here](http://chuck.cs.princeton.edu/).  ChucK looked promising but the scheduler (or shreduler) does not support a communication loop, nor selection, so two key benchmarks are not possible.  An alaysis of the language is provided.
 * [Clojure](https://en.wikipedia.org/wiki/Clojure) - instructions available [here](https://clojure.org/).
 * [Concurrent Pascal](https://en.wikipedia.org/wiki/Concurrent_Pascal) - although it might be a stretch saying this is live.  A compiler for microcontrollers is available [here](https://github.com/dhawk/concurrent-pascal-compiler).
 * [D](https://en.wikipedia.org/wiki/D_(programming_language)) - instructions available [here](https://dlang.org/).
@@ -129,11 +131,66 @@ If you want to help, feel free to pull the repository, implement the benchmarks,
 Not all of these languages may support message-passing concurrency, as only a quick overview has been made.  Languages may also be missing.  If you know of a language missed please get in touch.  Also, to be included a current implementation of the language is required.  There are historic languages with message-passing concurrency, but seem to be unavailable today.  For comparison purposes, the language must run on Linux.
 
 Language selection criteria:
+
 * the language __must__ provide mechanisms to send a message between components as part of the core language features (e.g., keyword support and/or standard library) and not via an additional library.
 * the message must be sent in a manner so that the receiver can __choose__ when to receive it; therefore, giving the receiver control over its internal state.  A method invocation on an object is therefore not a message.
 * messages __must__ be any structured data type supported in the language.  Conversion to bytes, strings, or another data serialization technique is __not__ considered message-passing.
 
 If you have to download a seperate library, or write your own functions, to achieve message-passing then the criteria does not allow the language to be included.  Future work will examine library support, but as numerous examples exist this is currently outside the scope of this work.
+
+## Language Timeline
+
+This section indicates when languages where released.  The aim is to illustrate any clusters of development.
+
+1972. (3) Concurrent Pascal, Prolog, Smalltalk
+1973. (1) Standard ML (as ML)
+1974. (0)
+1975. (0)
+1976. (0)
+1977. (0)
+1978. (0)
+1979. (0)
+1980. (0)
+1981. (0)
+1982. (1) SIGNAL
+1983. (4) Ada, Esterel, occam, SISAL
+1984. (0)
+1985. (0)
+1986. (3) Eiffel, Erlang, LabVIEW
+1987. (1) Perl
+1988. (2) Object REXX, Tcl
+1989. (1) SequenceL
+1990. (2) Haskell, J
+1991. (1) Oz
+1992. (1) &#x3bc;C++
+1993. (2) Lua, SuperPascal
+1994. (2) Newsquek, Racket
+1995. (2) Limbo, Ruby
+1996. (1) Ocaml
+1997. (1) E
+1998. (0)
+1999. (1) SystemC
+2000. (2) Hume, Join Java
+2001. (4) CAL Actor Language, D, SALSA, SpecC
+2002. (1) Io
+2003. (4) C&omega;, ChucK, Falcon, Go!
+2004. (1) Scala
+2005. (2) Neko, XC
+2006. (2) AmbientTalk, Sequoia++
+2007. (2) Clojure, Dodo
+2008. (2) Nim, PREESM
+2009. (3) Axum, Go, ProcessJ
+2010. (1) Rust
+2011. (3) Aha!, Elixir, Red
+2012. (1) Julia
+2013. (1) Zonnon
+2014. (3) Oforth, Pony, Swift
+2015. (2) Panda, Perl 6
+2016. (1) Fantom
+2017. (0)
+2018. (0)
+
+Unknown - Ateji PX, C=, Concurrent ML, Fancy, FortranM, JoCaml, MPD, Mythryl, SR, Unicon, Vorpal, Wren, Zkl
 
 ## Additional References
 
@@ -149,6 +206,7 @@ There are a few sites which provide useful information on programming languages:
 ## Properties
 
 The properties taken from process calculi are:
+
 * __Synchronous communication__ - do communicating components wait until they are both ready to complete a communication.
 * __First-order channels__ - does the language have a channel construct.
 * __Higher-order channels__ - can channels send channels.
@@ -176,6 +234,7 @@ At present, three benchmarks have been used.
 ### Communication Time
 
 This benchmark measures the communication / coordination time of a message.  Four processes are involved:
+
 * __Prefix__ outputs 0, then outputs what it inputs.
 * __Delta__ outputs its input on two channels sequentially.
 * __Successor__ increments its input before output.

@@ -52,7 +52,7 @@ The lack of first-order channels in Erlang is replaced by first-class processes.
 
 Erlang supports the communication of any type to a process's mailbox, including process IDs.  In fact, this is a common mechanism to allow communication networks to be set up.
 
-```
+```erlang
 A = spawn(...),
 B = spawn(...),
 A ! B.
@@ -66,7 +66,7 @@ As Erlang is a functional programming language values are not referenced between
 
 The lack of selection on messages is replaced by selection on incoming values in Erlang.  The incoming values that are selectable on are limited to user defined atoms, and the selection is more a form of pattern matching than a choice.
 
-```
+```erlang
 do_work() ->
   receive
     a -> %% do some work,
@@ -78,7 +78,7 @@ do_work() ->
 
 Erlang does allow guarded behaviour on selected incoming values.
 
-```
+```erlang
 guarded() ->
     receive
         N when N > 42 -> do_work_a();
@@ -91,7 +91,7 @@ guarded() ->
 
 The ```after``` option in a ```receive``` statement to have a timeout.
 
-```
+```erlang
 do_work(Timeout_ms) ->
     receive
         N -> do_more_work()
@@ -99,3 +99,7 @@ do_work(Timeout_ms) ->
         Timeout_ms -> do_less_work()
     end.
 ```
+
+## Compilation Process and Runtime Environment
+
+Erlang code runs within the Beam Virtual Machine.  The code is normally compiled and loaded from within a Read-Evaluated-Print Loop environment, although code can be compiled from the command line.

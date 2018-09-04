@@ -56,7 +56,7 @@ occam-&pi; has the ability to create typed channels, and the ability to capture 
 
 Mobile records enable communication of channel end types in occam-&pi;.
 
-```
+```occam
 CHAN TYPE INT.IO
   MOBILE RECORD
     CHAN INT in?:
@@ -80,7 +80,7 @@ Although occam-&pi; has mobile process types as an extension feature, which allo
 
 As occam-&pi; does have a ```MOBILE PROC``` type it can be argued that higher-order processes are supported.  However, these processes are really continuations.
 
-```
+```occam
 PROC TYPE mobile.proc(CHAN INT in?):
 
 MOBILE PROC my.proc(CHAN INT in?)
@@ -101,7 +101,7 @@ A higher-order process in occam-&pi; can be sent via a channel when it is suspen
 
 A parallel execution statement is provided.
 
-```
+```occam
 PROC system()
   PAR
     proc.1()
@@ -114,7 +114,7 @@ PROC system()
 
 occam-&pi; supports indexed parallel execution via the replicated ```PAR``` construct.
 
-```
+```occam
 PAR i = 0 FOR N
   my_func(i)
 ```
@@ -131,7 +131,7 @@ occam-&pi; does not allow processes to be assigned to a variable, but any proces
 
 ```ALT``` allows selection from a set of incoming channels.
 
-```
+```occam
 PROC do.work(CHAN INT in.0?, in.1)
   INT x:
   ALT
@@ -146,7 +146,7 @@ PROC do.work(CHAN INT in.0?, in.1)
 
 The ```ALT``` process can have ```FOR``` applied to it as ```SEQ``` and ```PAR``` can.
 
-```
+```occam
 PROC do.work([N]CHAN INT in?) 
     INT x:
     ALT i = 0 FOR N
@@ -159,7 +159,7 @@ PROC do.work([N]CHAN INT in?)
 
 Conditions can be placed directly into an ```ALT``` case. 
 
-```
+```occam
 PROC guarded(INT n, CHAN INT in?)
   INT x:
   ALT
@@ -178,7 +178,7 @@ occam-&pi;'s conditions are separate to the channels.  The logical condition can
 
 By default an ```ALT``` in occam-&pi; is fair.  occam-&pi; also provides an unfair ```PRI ALT``` where branches are evaluated in order.
 
-```
+```occam
 PROC do.work(CHAN INT in.0?, in.1)
   INT x:
   PRI ALT
@@ -193,7 +193,7 @@ PROC do.work(CHAN INT in.0?, in.1)
 
 The ```TIMER``` enables timeouts in an ```ALT```.  Multiple ```TIMER```s can be created, but the granularity of the timer is only milliseconds.
 
-```
+```occam
 PROC do.work(CHAN INT in?, INT timeout_ms)
   INT n, t:
   TIMER tim:
@@ -212,7 +212,7 @@ PROC do.work(CHAN INT in?, INT timeout_ms)
 
 The ```SKIP``` (empty process) guard is used for a default branch in an ```ALT```.
 
-```
+```occam
 PROC do.work(CHAN INT in?)
   INT n:
   ALT
@@ -227,7 +227,7 @@ PROC do.work(CHAN INT in?)
 
 A ```BARRIER``` is also provided by occam-$\pi$.
 
-```
+```occam
 PROC worker(CHAN INT out!, BARRIER bar)
   INT result:
   SEQ
@@ -236,3 +236,7 @@ PROC worker(CHAN INT out!, BARRIER bar)
     SYNC bar
 :
 ```
+
+## Compilation Process and Runtime Environment
+
+occam-&pi; code can be compiled to a number of different targets.  The Transtepreter will execute code in a virtual machine, whereas building for the local system will produce an executable that is built using the Kent CCSP library and runtime.  It therefore executes on the local machine.
