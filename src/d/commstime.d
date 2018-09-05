@@ -1,6 +1,6 @@
 import std.stdio;
 import std.concurrency;
-import std.datetime;
+import std.datetime.stopwatch;
 import core.thread;
 
 void id(Tid output, int count)
@@ -52,7 +52,7 @@ void printer(int count)
         if (i % 10000 == 0 && i > 0)
         {
             sw.stop();
-            results[i / 10000] = sw.peek.nsecs() / 10000;
+            results[i / 10000] = sw.peek.total!"nsecs" / 10000;
             writeln(results[i / 10000]);
             sw.reset();
             sw.start();
