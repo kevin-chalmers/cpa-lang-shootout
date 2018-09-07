@@ -3,61 +3,72 @@ import std.concurrency;
 import std.datetime.stopwatch;
 import core.thread;
 
-void id(Tid output, int count)
+const int EXPERIMENTS = 100;
+const int ITERATIONS_EXPERIMENT = 10000;
+
+void id(Tid output)
 {
-    for (int i = 0; i < count; ++i)
+    for (int i = 0; i < ITERATIONS_EXPERIMENT; ++i)
     {
         int value = receiveOnly!int();
         output.send(value);
     }
 }
 
-void prefix(int N, int count)
+void prefix(int N)
 {
     Tid output = receiveOnly!Tid();
-    output.send(N);
-    id(output, count);
+    for (int i = 0; i < EXPERIMENTS; ++i)
+    {
+        output.send(N);
+        id(output);
+    }
 }
 
-void delta(int count)
+void delta()
 {
     Tid out0 = receiveOnly!Tid();
     Tid out1 = receiveOnly!Tid();
-    for (int i = 0; i < count; ++i)
+    for (int i = 0; i < EXPERIMENTS; ++i)
     {
-        int value = receiveOnly!int();
-        out0.send(value);
-        out1.send(value);
+        for (int j = 0; j < ITERATIONS_EXPERIMENT; ++j)
+        {
+            int value = receiveOnly!int();
+            out0.send(value);
+            out1.send(value);
+        }
     }
 }
 
-void succ(int count)
+void succ()
 {
     Tid output = receiveOnly!Tid();
-    for (int i = 0; i < count; ++i)
+    for (int i = 0; i < EXPERIMENTS; ++i)
     {
-        int value = receiveOnly!int();
-        output.send(++value);
+        for (int j = 0; j < ITERATIONS_EXPERIMENT; ++j)
+        {
+            int value = receiveOnly!int();
+            output.send(++value);
+        }
     }
 }
 
-void printer(int count)
+void printer()
 {
     StopWatch sw;
-    long[100] results;
-    sw.start();
+    long[EXPERIMENTS] results;
     int value = 0;
-    for (int i = 0; i < count; ++i)
+    for (int i = 0; i < EXPERIMENTS; ++i)
     {
-        if (i % 10000 == 0 && i > 0)
+        sw.reset();
+        sw.start();
+        for (int j = 0; j < ITERATIONS_EXPERIMENT; ++j)
         {
-            sw.stop();
-            results[i / 10000] = sw.peek.total!"nsecs" / 10000;
-            writeln(results[i / 10000]);
-            sw.reset();
-            sw.start();
+            value = receiveOnly!int();
         }
-        value = receiveOnly!int();
+        sw.stop();
+        results[i] = sw.peek.total!"nsecs" / ITERATIONS_EXPERIMENT;
+        writeln(results[i]);
     }
     File file = File("ct-d.csv", "w");
     for (int i = 0; i < 100; ++i)
@@ -70,12 +81,12 @@ void printer(int count)
 void main()
 {
     int iterations = 1000000;
-    Tid delta = spawn(&delta, iterations);
-    Tid succ = spawn(&succ, iterations);
-    Tid pre = spawn(&prefix, 0, iterations);
+    Tid delta = spawn(&delta);
+    Tid succ = spawn(&succ);
+    Tid pre = spawn(&prefix, 0);
     delta.send(thisTid);
     delta.send(succ);
     pre.send(delta);
     succ.send(pre);
-    printer(iterations);
+    printer();
 }
