@@ -80,7 +80,6 @@ void printer()
 
 void main()
 {
-    int iterations = 1000000;
     Tid delta = spawn(&delta);
     Tid succ = spawn(&succ);
     Tid pre = spawn(&prefix, 0);
