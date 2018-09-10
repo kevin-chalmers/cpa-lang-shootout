@@ -1,4 +1,5 @@
 import std.stdio;
+import std.string;
 import std.concurrency;
 import std.datetime.stopwatch;
 import core.thread;
@@ -12,9 +13,9 @@ struct Packet
     int id;
 }
 
-void writer(Tid output, int writer)
+void writer(Tid output, int my_iters, int writer)
 {
-    for (int i = 0; i < count; ++i)
+    for (int i = 0; i < my_iters; ++i)
     {
         Packet p = {writer, i};
         output.send(p);
@@ -38,11 +39,26 @@ void reader(int writers)
         writeln(results[i]);
         sw.reset();
     }
-    File file = File("st-d-" + to_string(writers) + ".csv", "w");
+    string str = format("st-d-%s.csv", writers);
+    File file = File(str, "w");
+}
+
+void experiment(const int writers)
+{
+    for (int i = 0; i < writers; ++i)
+    {
+        Tid writer = spawn(&writer, thisTid, ITERATIONS / writers, i);
+    }
+    reader(writers);
 }
 
 void main()
 {
-    Tid reader = spawn(&reader, 0);
-    Tid writer = spawn(&writer, reader, 0);
+    writeln("Select Time Benchmark");
+    for (int i = 1; i <= 16; i *= 2)
+    {
+        string str = format("%s writers", i);
+        writeln(str);
+        experiment(i);
+    }
 }
