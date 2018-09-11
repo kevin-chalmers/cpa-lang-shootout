@@ -10,12 +10,13 @@ The information presented was taken from Erlang 18.
 
 Information was gathered by running the applications within the Erlang VM.  Start Erlang and then:
 
-```
+```shell
 c(<name>).
 <name>:start().
 ```
 
 The benchmarks provided are:
+
 * [Communication Time](commstime.erl)
 * [Selection Time](selecttime.erl)
 * [Monte Carlo &pi;](montecarlopi.erl)
@@ -46,7 +47,7 @@ The benchmarks provided are:
 
 ### First-order Processes
 
-The lack of first-order channels in Erlang is replaced by first-class processes.  When a process is created, using the ```spawn``` function, the ID of the created process is returned.  This allows messages to be sent to the process.
+The lack of first-order channels in Erlang is replaced by first-class processes.  When a process is created, using the `spawn` function, the ID of the created process is returned.  This allows messages to be sent to the process.
 
 ### Higher-order Processes
 
