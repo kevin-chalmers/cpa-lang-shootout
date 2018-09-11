@@ -36,6 +36,7 @@ The languages currently evaluated are:
 
 * [Ada](src/ada/)
 * [ChucK](src/chuck/)
+* [D](src/d/)
 * [Erlang](src/erlang/)
 * [Go](src/go/)
 * [occam-_&pi;_](src/occam/)
