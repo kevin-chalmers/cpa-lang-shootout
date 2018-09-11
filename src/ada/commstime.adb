@@ -38,7 +38,7 @@ task body PREFIX is
 begin
     for i in 0..Experiments loop
         SEQ_DELTA.Send(0);
-        for i in 0..Iterations_Experiment loop
+        for j in 0..Iterations_Experiment loop
             accept Send(Value : in INTEGER) do
                 N := Value;
             end;
@@ -53,7 +53,7 @@ task body SEQ_DELTA is
     N : INTEGER;
 begin
     for i in 0..Experiments loop
-        for i in 0..Iterations_Experiment loop
+        for j in 0..Iterations_Experiment loop
             accept Send(Value : in INTEGER) do
                 N := Value;
             end;
@@ -67,7 +67,7 @@ task body SUCC is
     N : INTEGER;
 begin
     for i in 0..Experiments loop
-        for i in 0..Iterations_Experiment loop
+        for j in 0..Iterations_Experiment loop
             accept Send(Value : in INTEGER) do
                 N := Value;
             end;
