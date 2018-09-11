@@ -51,7 +51,7 @@ procedure MonteCarloPi is
       pi : Float;
    begin
       for i in 1..EXPERIMENTS loop
-         for i in 1..iters loop
+         for j in 1..iters loop
             x := Random(gen);
             y := Random(gen);
             if x**2 + y**2 <= 1.0 then

@@ -41,6 +41,11 @@ void reader(int writers)
     }
     string str = format("st-d-%s.csv", writers);
     File file = File(str, "w");
+    for (int i = 0; i < ITERATIONS / ITERATIONS_EXPERIMENT; ++i)
+    {
+        file.writeln(results[i]);
+    }
+    file.close();
 }
 
 void experiment(const int writers)

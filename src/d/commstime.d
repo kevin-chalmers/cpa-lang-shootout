@@ -71,7 +71,7 @@ void printer()
         writeln(results[i]);
     }
     File file = File("ct-d.csv", "w");
-    for (int i = 0; i < 100; ++i)
+    for (int i = 0; i < EXPERIMENTS; ++i)
     {
         file.writeln(results[i]);
     }
