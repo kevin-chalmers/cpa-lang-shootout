@@ -50,6 +50,7 @@ Languages that have so far been discounted are:
 * Axum
 * C=
 * C&omega;
+* Clojure
 * Concurrent Pascal, although SuperPascal may allow a similar analysis.
 
 ## Benchmark Results
@@ -68,8 +69,8 @@ If you want to help, feel free to pull the repository, implement the benchmarks,
 
 * [Aikido](http://aikido.sourceforge.net/.)
 * [ALGOL 68](https://en.wikipedia.org/wiki/ALGOL_68) - but may be stretching the definition.
-* [BCPL](https://www.cl.cam.ac.uk/~mr10/) - but looks like a complicated mechanism to allow communication.
-* [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) - via [`BlockingCollection`](https://docs.microsoft.com/en-us/dotnet/standard/collections/thread-safe/blockingcollection-overview)
+* [BCPL](https://en.wikipedia.org/wiki/BCPL) - details [here](https://www.cl.cam.ac.uk/~mr10/) - but looks like a complicated mechanism to allow communication.
+* [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) - via [`BlockingCollection`](https://docs.microsoft.com/en-us/dotnet/standard/collections/thread-safe/blockingcollection-overview).
 * [CAL Actor Language](https://en.wikipedia.org/wiki/CAL_Actor_Language) - tricky to find an implementation.  Try [here](http://orcc.sourceforge.net/).
 * [Dodo](http://dodo.sourceforge.net/)
 * [E](https://en.wikipedia.org/wiki/E_(programming_language)) - instructions available [here](http://erights.org/).
@@ -85,7 +86,7 @@ If you want to help, feel free to pull the repository, implement the benchmarks,
 * [Haskell](https://en.wikipedia.org/wiki/Haskell_(programming_language)) - via the [Control.Concurrent.Chan](https://hackage.haskell.org/package/base-4.10.0.0/docs/Control-Concurrent-Chan.html) type.  Unclear if this is part of standard Haskell.
 * [Hume](https://en.wikipedia.org/wiki/Hume_(programming_language)) - instructions available [here](http://www.hume-lang.org/).
 * [Go!](https://en.wikipedia.org/wiki/Go!_(programming_language)) (not to be confused with Go) - instructions available [here](https://github.com/frankmccabe/go).
-* [Goaldi](https://github.com/proebsting/goaldi).
+* [Goaldi](https://github.com/proebsting/goaldi)
 * [Icon](https://en.wikipedia.org/wiki/Icon_(programming_language)) - although not sure a compiler exists anymore.
 * [Io](https://en.wikipedia.org/wiki/Io_(programming_language)) - instructions available [here](http://iolanguage.org/).
 * [J](https://en.wikipedia.org/wiki/J_(programming_language)) - instructions available [here](http://www.jsoftware.com/).
@@ -173,12 +174,17 @@ For various reasons, some languages originally considered for the study have bee
 
 This section indicates when languages where released.  The aim is to illustrate any clusters of development.
 
-1972. (3) Concurrent Pascal, Prolog, Smalltalk
+1967. (1) BCPL
+1968. (1) ALGOL 68
+1969. (0)
+1970. (0)
+1971. (0)
+1972. (2) Prolog, Smalltalk
 1973. (1) Standard ML (as ML)
 1974. (0)
 1975. (0)
 1976. (0)
-1977. (0)
+1977. (1) Icon
 1978. (0)
 1979. (0)
 1980. (0)
@@ -189,39 +195,39 @@ This section indicates when languages where released.  The aim is to illustrate 
 1985. (0)
 1986. (3) Eiffel, Erlang, LabVIEW
 1987. (1) Perl
-1988. (2) Object REXX, Tcl
+1988. (3) Object REXX, PicoLisp, Tcl
 1989. (1) SequenceL
-1990. (2) Haskell, J
+1990. (3) Haskell, J, Python
 1991. (1) Oz
-1992. (1) &#x3bc;C++
-1993. (2) Lua, SuperPascal
+1992. (1) μC++
+1993. (4) Concurrent ML, Euphoria, Lua, SuperPascal
 1994. (2) Newsquek, Racket
-1995. (2) Limbo, Ruby, Java
+1995. (4) Java, Limbo, Mercury, Ruby
 1996. (1) Ocaml
 1997. (1) E
-1998. (0)
+1998. (1) Logtalk
 1999. (1) SystemC
-2000. (2) Hume, Join Java
+2000. (4) C#, Hume, Join Java, Unicon
 2001. (4) CAL Actor Language, D, SALSA, SpecC
-2002. (1) Io
-2003. (4) C&omega;, ChucK, Falcon, Go!
+2002. (2) Io, SystemVerilog
+2003. (4) Aikido, ChucK, Falcon, Go!
 2004. (1) Scala
-2005. (2) Neko, XC
-2006. (2) AmbientTalk, Sequoia++
-2007. (2) Clojure, Dodo
+2005. (3) F#, Neko, XC
+2006. (1) Sequoia++
+2007. (1) Dodo
 2008. (2) Nim, PREESM
-2009. (3) Axum, Go, ProcessJ
-2010. (1) Rust
-2011. (3) Aha!, Elixir, Red
+2009. (3) Clump, Go, ProcessJ
+2010. (2) Fancy, Rust
+2011. (3) Elixir, Kotlin, Red
 2012. (1) Julia
-2013. (1) Zonnon
-2014. (3) Oforth, Pony, Swift
+2013. (2) Wren, Zonnon
+2014. (4) Goaldi, Oforth, Pony, Swift
 2015. (2) Panda, Perl 6
 2016. (1) Fantom
 2017. (0)
 2018. (0)
 
-Unknown - Ateji PX, C=, Concurrent ML, Fancy, FortranM, JoCaml, MPD, Mythryl, SR, Unicon, Vorpal, Wren, Zkl
+Unknown - FortranM, JoCaml, MPD, Mythryl, Phix, SR, Zkl
 
 ## Additional References
 
