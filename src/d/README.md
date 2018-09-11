@@ -115,6 +115,10 @@ receive(
 
 If there are no values of type `int` in the mailbox, the `Variant` case will be choosen, and the value(s) provided in `v`.  If multiple values are in the mailbox, `v` will be a `Tuple`.
 
+### Multi-party Synchronisation
+
+D provides a `Barrier` type (`core.sync.barrier`) that provides multi-party synchronisation.
+
 ## Compilation Process and Runtime Environment
 
 D code compiles to a binary executable.  D also provides different schedulers, so an application may use kernel-level or user-level threads based.

@@ -64,25 +64,20 @@ The benchmarks are described in the appendix below.
 
 ## Contributing to the Evaluation
 
-If you want to help, feel free to pull the repository, implement the benchmarks, undertake the evaluation, and make a pull request.  At present, the following languages have been identified as potentially having message-passing concurrency support in the language or via the language's standard libraries.
+If you want to help, feel free to pull the repository, implement the benchmarks, undertake the evaluation, and make a pull request.  At present, the following languages have been identified as potentially having message-passing concurrency support in the language or via the language's standard libraries but have not been completed.
 
-* [Ada](https://en.wikipedia.org/wiki/Ada_(programming_language)) - the typical install is [GNAT](http://libre.adacore.com/).
-* [Aha!](http://www.ahafactor.net/language).  Appears to be unavailable now.
-* [AmbientTalk](https://en.wikipedia.org/wiki/AmbientTalk) - instructions available [here](http://soft.vub.ac.be/amop/).  On analysis, AmbientTalk does not meet criteria 2 (the message must be sent in a manner so that the receiver can __choose__ when to receive it; therefore, giving the receiver control over its internal state).  This is because messages are essentially asynchronous method calls on actors, not a communication that the actor can decide when to engage in.
-* [Ateji PX](https://en.wikipedia.org/wiki/Ateji_PX) - seems to be unavailable now.
-* [Axum](https://en.wikipedia.org/wiki/Axum_(programming_language)) - but looks like this is [closed](https://msdn.microsoft.com/en-us/devlabs/dd795202.aspx).
-* [C=](http://www.hoopoesnest.com/cstripes/cstripes-sketch.htm) - although unsure how easy it is to communicate between concurrent components.  Appears to be unavailable now.
-* [C&omega;](https://en.wikipedia.org/wiki/C%CF%89) - Microsoft Research [page](https://www.microsoft.com/en-us/research/project/comega/?from=http%3A%2F%2Fresearch.microsoft.com%2Fcomega%2F).  Might not be suitable.  After some investigation, C&omega; became the [Joins Concurrency Library](https://en.wikipedia.org/wiki/Joins_(concurrency_library)) for .NET, although this is not a standard library and therefore does not meet the criteria.  A C&omega; compiler can be downloaded, but it requires .NET 1.1, which is no longer supported.  Thus, C&omega; has been discounted from the list.
+* [Aikido](http://aikido.sourceforge.net/.)
+* [ALGOL 68](https://en.wikipedia.org/wiki/ALGOL_68) - but may be stretching the definition.
+* [BCPL](https://www.cl.cam.ac.uk/~mr10/) - but looks like a complicated mechanism to allow communication.
+* [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) - via [`BlockingCollection`](https://docs.microsoft.com/en-us/dotnet/standard/collections/thread-safe/blockingcollection-overview)
 * [CAL Actor Language](https://en.wikipedia.org/wiki/CAL_Actor_Language) - tricky to find an implementation.  Try [here](http://orcc.sourceforge.net/).
-* [ChucK](https://en.wikipedia.org/wiki/ChucK) - instructions available [here](http://chuck.cs.princeton.edu/).  ChucK looked promising but the scheduler (or shreduler) does not support a communication loop, nor selection, so two key benchmarks are not possible.  An analysis of the language is provided.
-* [Clojure](https://en.wikipedia.org/wiki/Clojure) - instructions available [here](https://clojure.org/).  At present this does not seem to meet the criteria.  The `agents` package provides simple agents that respond to function calls but have no control over their state.  The `core.async` package does provide the functionality, but it is not core Clojure and therefore does not meet criteria 1.
-* [Concurrent Pascal](https://en.wikipedia.org/wiki/Concurrent_Pascal) - although it might be a stretch saying this is live.  A compiler for microcontrollers is available [here](https://github.com/dhawk/concurrent-pascal-compiler).  After some investigation it appears that Concurrent Pascal is not available.  No version exists that can be executed on a Linux desktop.
-* [D](https://en.wikipedia.org/wiki/D_(programming_language)) - instructions available [here](https://dlang.org/).
 * [Dodo](http://dodo.sourceforge.net/)
 * [E](https://en.wikipedia.org/wiki/E_(programming_language)) - instructions available [here](http://erights.org/).
 * [Eiffel](https://en.wikipedia.org/wiki/Eiffel_(programming_language)) - a good starting point is probably [Eiffel Software](https://www.eiffel.com/).  Concurrency seems to be provided via [SCOOP](https://www.eiffel.org/doc/solutions/Concurrent%20programming%20with%20SCOOP) but unclear if message passing is available.
 * [Elixir](https://en.wikipedia.org/wiki/Elixir_(programming_language)) (although this is really just Erlang) - instructions available [here](https://elixir-lang.org/).
 * [Esterel](https://en.wikipedia.org/wiki/Esterel) - instructions available [here](http://www.esterel.org/).
+* [Euphoria](https://en.wikipedia.org/wiki/Euphoria_(programming_language)) - instructions available [here](https://openeuphoria.org/).
+* [F#](https://en.wikipedia.org/wiki/F_Sharp_(programming_language))
 * [Falcon](https://en.wikipedia.org/wiki/Falcon_(programming_language)) - instructions available [here](http://falconpl.org/).
 * [Fantom](https://en.wikipedia.org/wiki/Fantom_(programming_language)) (although this does run on-top of other runtimes) - instructions available [here](http://www.fantom.org/).
 * [Fancy](http://www.fancy-lang.org/)
@@ -90,15 +85,20 @@ If you want to help, feel free to pull the repository, implement the benchmarks,
 * [Haskell](https://en.wikipedia.org/wiki/Haskell_(programming_language)) - via the [Control.Concurrent.Chan](https://hackage.haskell.org/package/base-4.10.0.0/docs/Control-Concurrent-Chan.html) type.  Unclear if this is part of standard Haskell.
 * [Hume](https://en.wikipedia.org/wiki/Hume_(programming_language)) - instructions available [here](http://www.hume-lang.org/).
 * [Go!](https://en.wikipedia.org/wiki/Go!_(programming_language)) (not to be confused with Go) - instructions available [here](https://github.com/frankmccabe/go).
+* [Goaldi](https://github.com/proebsting/goaldi).
+* [Icon](https://en.wikipedia.org/wiki/Icon_(programming_language)) - although not sure a compiler exists anymore.
 * [Io](https://en.wikipedia.org/wiki/Io_(programming_language)) - instructions available [here](http://iolanguage.org/).
 * [J](https://en.wikipedia.org/wiki/J_(programming_language)) - instructions available [here](http://www.jsoftware.com/).
 * [Java](https://en.wikipedia.org/wiki/Java_(programming_language)) - the [`SynchronousQueue`](https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/SynchronousQueue.html) is part of the standard Java API and provides a synchronous channel like construct.
 * [JoCaml](https://en.wikipedia.org/wiki/JoCaml) - instructions available [here](http://jocaml.inria.fr/).
 * [Join Java](https://en.wikipedia.org/wiki/Join_Java) - appears to have been a PhD project.  Try [here](http://joinjava.unisa.edu.au/).
 * [Julia](https://en.wikipedia.org/wiki/Julia_(programming_language)) - instructions available [here](https://julialang.org/).
+* [Kotlin](https://en.wikipedia.org/wiki/Kotlin_(programming_language)) - instructions available [here](https://kotlinlang.org/).
 * [LabVIEW](https://en.wikipedia.org/wiki/LabVIEW) - might be stretching the definition though.  Instructions available [here](http://www.ni.com/en-gb/shop/labview.html).
 * [Limbo](https://en.wikipedia.org/wiki/Limbo_(programming_language)) - instructions available [here](http://www.vitanuova.com/inferno/limbo.html).
+* [Logtalk](https://en.wikipedia.org/wiki/Logtalk) - instructions available [here](https://logtalk.org/).
 * [Lua](https://en.wikipedia.org/wiki/Lua_(programming_language)) - instructions available [here](https://www.lua.org/).
+* [Mercury](https://en.wikipedia.org/wiki/Mercury_(programming_language)) - instructions available [here](http://www.mercurylang.org/).
 * [MPD](https://en.wikipedia.org/wiki/MPD_(programming_language)) - instructions available [here](https://www2.cs.arizona.edu/mpd/).
 * [Mythryl](https://mythryl.org/index3.html)
 * [Neko](https://en.wikipedia.org/wiki/Neko_(programming_language)) - instructions available [here](http://nekovm.org/).
@@ -111,10 +111,13 @@ If you want to help, feel free to pull the repository, implement the benchmarks,
 * [Panda](https://panda-lang.org/)
 * [Perl](https://en.wikipedia.org/wiki/Perl) - although I think this may be via OS process communication.  Instructions available [here](https://www.perl.org/).
 * [Perl 6](https://en.wikipedia.org/wiki/Perl_6) - although see comment on Perl.  Instructions available [here](https://perl6.org/).
+* [Phix](http://phix.x10.mx/) - but seems just to be Euphoria.
+* [PicoLisp](https://en.wikipedia.org/wiki/PicoLisp) - details available [here](https://picolisp.com/wiki/?home).
 * [Pony](https://www.ponylang.org/)
 * [Preesm](https://en.wikipedia.org/wiki/Preesm) - may be stretching the definition.  Instructions available [here](http://preesm.sourceforge.net/website/).
 * [ProcessJ](https://processj.cs.unlv.edu/)
-* [Prolog](https://en.wikipedia.org/wiki/Prolog) - there appears to be send message and receive message support.  See [here](http://www.swi-prolog.org/pldoc/man?section=threads)
+* [Prolog](https://en.wikipedia.org/wiki/Prolog) - there appears to be send message and receive message support.  See [here](http://www.swi-prolog.org/pldoc/man?section=threads).
+* [Python](https://en.wikipedia.org/wiki/Python_(programming_language)) via threads and queues.  Details available [here](https://www.python.org/).
 * [Racket](https://en.wikipedia.org/wiki/Racket_(programming_language)) - instructions available [here](https://racket-lang.org/).
 * [Red](https://en.wikipedia.org/wiki/Red_(programming_language)) - instructions available [here](http://www.red-lang.org/).
 * [Ruby](https://en.wikipedia.org/wiki/Ruby_(programming_language)) - instructions available [here](https://www.ruby-lang.org/en/).  Unsure about this.
@@ -131,6 +134,7 @@ If you want to help, feel free to pull the repository, implement the benchmarks,
 * [SuperPascal](https://en.wikipedia.org/wiki/SuperPascal) - unlikely to be still possible, but try [here](http://brinch-hansen.net/) and [here](https://github.com/octonion/superpascal).
 * [Swift](https://en.wikipedia.org/wiki/Swift_(programming_language)) (via Grand Central Dispatch) - Swift is [available for Linux](https://swift.org/download/).
 * [SystemC](https://en.wikipedia.org/wiki/SystemC) - but looks like this is no longer available.  [Official website](http://systemc.org/).
+* [SystemVerilog](https://en.wikipedia.org/wiki/SystemVerilog)
 * [Tcl](https://en.wikipedia.org/wiki/Tcl) - instructions available [here](http://www.tcl.tk/).
 * [Unicon](https://en.wikipedia.org/wiki/Unicon_(programming_language)) - instructions available [here](https://unicon.sourceforge.io/).
 * [Vorpal](http://vmlanguages.is-research.de/vorpal/) - seems to have become [Clump](http://d.plaindoux.free.fr/clump/).
@@ -147,9 +151,23 @@ Language selection criteria:
 * the language __must__ provide mechanisms to send a message between components as part of the core language features (e.g., keyword support and/or standard library) and not via an additional library.
 * the message must be sent in a manner so that the receiver can __choose__ when to receive it; therefore, giving the receiver control over its internal state.  A method invocation on an object is therefore not a message.
 * the receiver __must__ be able to wait __passively__ for a message to be received - that is, a busy spinning on a value to change is not a message.  Having a queue between threads that a receiver tests for readiness is not suitable.
+* a communication __must__ be made using a single command, i.e., language keyword or standard library call.  A slight concesion is made for *yielding* due to the use of coroutine approaches that often require an explicit `yield` statement, and languages that may define a communication in some form of block statement.  This is to keep in the spirit of a message-pass being a single operation.
 * messages __must__ be any structured data type supported in the language.  Conversion to bytes, strings, or another data serialization technique is __not__ considered message-passing.  Nor is any use of I/O mechanisms to simulate communication.
 
 If you have to download a separate library, or write your own functions, to achieve message-passing then the criteria does not allow the language to be included.  Future work will examine library support, but as numerous examples exist this is currently outside the scope of this work.
+
+### Currently Discounted Languages
+
+For various reasons, some languages originally considered for the study have been discounted.  These languages, and some information for there discounting, are listed below:
+
+* [Aha!](http://www.ahafactor.net/language).  Appears to be unavailable now.
+* [AmbientTalk](https://en.wikipedia.org/wiki/AmbientTalk) - instructions available [here](http://soft.vub.ac.be/amop/).  On analysis, AmbientTalk does not meet criteria 2 (the message must be sent in a manner so that the receiver can __choose__ when to receive it; therefore, giving the receiver control over its internal state).  This is because messages are essentially asynchronous method calls on actors, not a communication that the actor can decide when to engage in.
+* [Ateji PX](https://en.wikipedia.org/wiki/Ateji_PX) - seems to be unavailable now.
+* [Axum](https://en.wikipedia.org/wiki/Axum_(programming_language)) - but looks like this is [closed](https://msdn.microsoft.com/en-us/devlabs/dd795202.aspx).
+* [C=](http://www.hoopoesnest.com/cstripes/cstripes-sketch.htm) - although unsure how easy it is to communicate between concurrent components.  Appears to be unavailable now.
+* [C&omega;](https://en.wikipedia.org/wiki/C%CF%89) - Microsoft Research [page](https://www.microsoft.com/en-us/research/project/comega/?from=http%3A%2F%2Fresearch.microsoft.com%2Fcomega%2F).  Might not be suitable.  After some investigation, C&omega; became the [Joins Concurrency Library](https://en.wikipedia.org/wiki/Joins_(concurrency_library)) for .NET, although this is not a standard library and therefore does not meet the criteria.  A C&omega; compiler can be downloaded, but it requires .NET 1.1, which is no longer supported.  Thus, C&omega; has been discounted from the list.
+* [Clojure](https://en.wikipedia.org/wiki/Clojure) - instructions available [here](https://clojure.org/).  At present this does not seem to meet the criteria.  The `agents` package provides simple agents that respond to function calls but have no control over their state.  The `core.async` package does provide the functionality, but it is not core Clojure and therefore does not meet criteria 1.
+* [Concurrent Pascal](https://en.wikipedia.org/wiki/Concurrent_Pascal) - although it might be a stretch saying this is live.  A compiler for microcontrollers is available [here](https://github.com/dhawk/concurrent-pascal-compiler).  After some investigation it appears that Concurrent Pascal is not available.  No version exists that can be executed on a Linux desktop.
 
 ## Language Timeline
 
