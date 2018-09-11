@@ -45,13 +45,17 @@ The languages currently evaluated are:
 Languages that have so far been discounted are:
 
 * Aha!
+* ALGOL 68
 * AmbientTalk
 * Ateji PX
 * Axum
+* BCPL
 * C=
 * C&omega;
 * Clojure
 * Concurrent Pascal, although SuperPascal may allow a similar analysis.
+
+Details on why these languages are discounted is given in the [Discounted Languages](#CurrentlyDiscountedLanguages) section.
 
 ## Benchmark Results
 
@@ -68,8 +72,6 @@ The benchmarks are described in the appendix below.
 If you want to help, feel free to pull the repository, implement the benchmarks, undertake the evaluation, and make a pull request.  At present, the following languages have been identified as potentially having message-passing concurrency support in the language or via the language's standard libraries but have not been completed.
 
 * [Aikido](http://aikido.sourceforge.net/.)
-* [ALGOL 68](https://en.wikipedia.org/wiki/ALGOL_68) - but may be stretching the definition.
-* [BCPL](https://en.wikipedia.org/wiki/BCPL) - details [here](https://www.cl.cam.ac.uk/~mr10/) - but looks like a complicated mechanism to allow communication.
 * [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) - via [`BlockingCollection`](https://docs.microsoft.com/en-us/dotnet/standard/collections/thread-safe/blockingcollection-overview).
 * [CAL Actor Language](https://en.wikipedia.org/wiki/CAL_Actor_Language) - tricky to find an implementation.  Try [here](http://orcc.sourceforge.net/).
 * [Dodo](http://dodo.sourceforge.net/)
@@ -149,11 +151,11 @@ Not all of these languages may support message-passing concurrency, as only a qu
 
 Language selection criteria:
 
-* the language __must__ provide mechanisms to send a message between components as part of the core language features (e.g., keyword support and/or standard library) and not via an additional library.
-* the message must be sent in a manner so that the receiver can __choose__ when to receive it; therefore, giving the receiver control over its internal state.  A method invocation on an object is therefore not a message.
-* the receiver __must__ be able to wait __passively__ for a message to be received - that is, a busy spinning on a value to change is not a message.  Having a queue between threads that a receiver tests for readiness is not suitable.
-* a communication __must__ be made using a single command, i.e., language keyword or standard library call.  A slight concesion is made for *yielding* due to the use of coroutine approaches that often require an explicit `yield` statement, and languages that may define a communication in some form of block statement.  This is to keep in the spirit of a message-pass being a single operation.
-* messages __must__ be any structured data type supported in the language.  Conversion to bytes, strings, or another data serialization technique is __not__ considered message-passing.  Nor is any use of I/O mechanisms to simulate communication.
+1. the language __must__ provide mechanisms to send a message between components as part of the core language features (e.g., keyword support and/or standard library) and not via an additional library.
+2. the message must be sent in a manner so that the receiver can __choose__ when to receive it; therefore, giving the receiver control over its internal state.  A method invocation on an object is therefore not a message.
+3. the receiver __must__ be able to wait __passively__ for a message to be received - that is, a busy spinning on a value to change is not a message.  Having a queue between threads that a receiver tests for readiness is not suitable.
+4. a communication __must__ be made using a single command, i.e., language keyword or standard library call.  A slight concesion is made for *yielding* due to the use of coroutine approaches that often require an explicit `yield` statement, and languages that may define a communication in some form of block statement.  This is to keep in the spirit of a message-pass being a single operation.
+5. messages __must__ be any structured data type supported in the language.  Conversion to bytes, strings, or another data serialization technique is __not__ considered message-passing.  Nor is any use of I/O mechanisms to simulate communication.
 
 If you have to download a separate library, or write your own functions, to achieve message-passing then the criteria does not allow the language to be included.  Future work will examine library support, but as numerous examples exist this is currently outside the scope of this work.
 
@@ -162,9 +164,11 @@ If you have to download a separate library, or write your own functions, to achi
 For various reasons, some languages originally considered for the study have been discounted.  These languages, and some information for there discounting, are listed below:
 
 * [Aha!](http://www.ahafactor.net/language).  Appears to be unavailable now.
+* [ALGOL 68](https://en.wikipedia.org/wiki/ALGOL_68) - but may be stretching the definition.  ALGOL 68 requires explicit use of shared values and semaphores to enable message passing.  This violates criteria 4.
 * [AmbientTalk](https://en.wikipedia.org/wiki/AmbientTalk) - instructions available [here](http://soft.vub.ac.be/amop/).  On analysis, AmbientTalk does not meet criteria 2 (the message must be sent in a manner so that the receiver can __choose__ when to receive it; therefore, giving the receiver control over its internal state).  This is because messages are essentially asynchronous method calls on actors, not a communication that the actor can decide when to engage in.
 * [Ateji PX](https://en.wikipedia.org/wiki/Ateji_PX) - seems to be unavailable now.
 * [Axum](https://en.wikipedia.org/wiki/Axum_(programming_language)) - but looks like this is [closed](https://msdn.microsoft.com/en-us/devlabs/dd795202.aspx).
+* [BCPL](https://en.wikipedia.org/wiki/BCPL) - details [here](https://www.cl.cam.ac.uk/~mr10/) - but looks like a complicated mechanism to allow communication.  On examination, although BCPL does have coroutine support, message-passing has to be implemented by the programmer.  As such, BCPL is dicounted.
 * [C=](http://www.hoopoesnest.com/cstripes/cstripes-sketch.htm) - although unsure how easy it is to communicate between concurrent components.  Appears to be unavailable now.
 * [C&omega;](https://en.wikipedia.org/wiki/C%CF%89) - Microsoft Research [page](https://www.microsoft.com/en-us/research/project/comega/?from=http%3A%2F%2Fresearch.microsoft.com%2Fcomega%2F).  Might not be suitable.  After some investigation, C&omega; became the [Joins Concurrency Library](https://en.wikipedia.org/wiki/Joins_(concurrency_library)) for .NET, although this is not a standard library and therefore does not meet the criteria.  A C&omega; compiler can be downloaded, but it requires .NET 1.1, which is no longer supported.  Thus, C&omega; has been discounted from the list.
 * [Clojure](https://en.wikipedia.org/wiki/Clojure) - instructions available [here](https://clojure.org/).  At present this does not seem to meet the criteria.  The `agents` package provides simple agents that respond to function calls but have no control over their state.  The `core.async` package does provide the functionality, but it is not core Clojure and therefore does not meet criteria 1.
@@ -174,11 +178,6 @@ For various reasons, some languages originally considered for the study have bee
 
 This section indicates when languages where released.  The aim is to illustrate any clusters of development.
 
-1967. (1) BCPL
-1968. (1) ALGOL 68
-1969. (0)
-1970. (0)
-1971. (0)
 1972. (2) Prolog, Smalltalk
 1973. (1) Standard ML (as ML)
 1974. (0)
