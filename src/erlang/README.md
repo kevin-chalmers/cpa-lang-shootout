@@ -10,12 +10,13 @@ The information presented was taken from Erlang 18.
 
 Information was gathered by running the applications within the Erlang VM.  Start Erlang and then:
 
-```
+```shell
 c(<name>).
 <name>:start().
 ```
 
 The benchmarks provided are:
+
 * [Communication Time](commstime.erl)
 * [Selection Time](selecttime.erl)
 * [Monte Carlo &pi;](montecarlopi.erl)
@@ -35,7 +36,7 @@ The benchmarks provided are:
 | Process ownership                         | no      |
 | Selection on incoming messages            | no      |
 | Indexed selection                         | no      |
-| Selection based on incoming value         | yes     |
+| Selection based on incoming value         | partial |
 | Guarded selection                         | yes     |
 | Fair selection                            | no      |
 | Selection with timer                      | yes     |
@@ -46,13 +47,13 @@ The benchmarks provided are:
 
 ### First-order Processes
 
-The lack of first-order channels in Erlang is replaced by first-class processes.  When a process is created, using the ```spawn``` function, the ID of the created process is returned.  This allows messages to be sent to the process.
+The lack of first-order channels in Erlang is replaced by first-class processes.  When a process is created, using the `spawn` function, the ID of the created process is returned.  This allows messages to be sent to the process.
 
 ### Higher-order Processes
 
 Erlang supports the communication of any type to a process's mailbox, including process IDs.  In fact, this is a common mechanism to allow communication networks to be set up.
 
-```
+```erlang
 A = spawn(...),
 B = spawn(...),
 A ! B.
@@ -66,7 +67,7 @@ As Erlang is a functional programming language values are not referenced between
 
 The lack of selection on messages is replaced by selection on incoming values in Erlang.  The incoming values that are selectable on are limited to user defined atoms, and the selection is more a form of pattern matching than a choice.
 
-```
+```erlang
 do_work() ->
   receive
     a -> %% do some work,
@@ -78,7 +79,7 @@ do_work() ->
 
 Erlang does allow guarded behaviour on selected incoming values.
 
-```
+```erlang
 guarded() ->
     receive
         N when N > 42 -> do_work_a();
@@ -91,7 +92,7 @@ guarded() ->
 
 The ```after``` option in a ```receive``` statement to have a timeout.
 
-```
+```erlang
 do_work(Timeout_ms) ->
     receive
         N -> do_more_work()

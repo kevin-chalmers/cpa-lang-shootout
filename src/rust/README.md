@@ -47,7 +47,7 @@ The benchmarks provided are:
 
 Rust's default channel type is asynchronous, but a synchronous channel is provided which can have a buffer size set during creation: a buffer size of 0 is a rendezvous channel.
 
-```
+```rust
 // Create "infinitely buffered" channel.
 let (tx, rx) = channel();
 // Create a synchronous channel of buffer size n
@@ -62,7 +62,7 @@ The channel type in Rust is explicitly assignable to writing end and reading end
 
 Rust can also declare channels of types to send channel ends - either ```Sender```, ```SyncSender```, ```Receiver```.
 
-```
+```rust
 // Create two channels.
 let (a_tx, a_rx) = channel();
 let (b_tx, b_rx) = channel();
@@ -74,7 +74,7 @@ a_tx.send(b_tx).unwrap();
 
 Although threads are created in Rust using the ```thread::spawn``` command, a ```thread``` object is not accessible.  Rather, ```thread::spawn``` returns a ```JoinHandle``` object, which allows the parent thread to join (wait) for the created child thread.  It is argued that Rust's thread creation mechanism does allow assignment of a value representative of the created thread, and therefore Rust provides first-class processes.
 
-```
+```rust
 let child = thread::spawn(move || { println!("Hello World!"); });
 ```
 
@@ -90,7 +90,7 @@ Ownership of resources is an important factor in Rust, and although references a
 
 Selection in Rust is currently in an experimental state, although it used to be in the standard library.  The functionality is provided, but it is considered not necessarily stable.  As such, a nightly build of Rust is required to perform selection.
 
-```
+```rust
 fn do_work(in0 : Receiver<i32>, in1 : Receiver<i32>) {
     select! {
         msg = in0.recv() => // do some work
@@ -103,7 +103,7 @@ fn do_work(in0 : Receiver<i32>, in1 : Receiver<i32>) {
 
 A ```Barrier``` type is provided by Rust.
 
-```
+```rust
 fn worker(out : Sender<i32>, bar : Barrier) {
     // Do some work
     out.send(result).unwrap();

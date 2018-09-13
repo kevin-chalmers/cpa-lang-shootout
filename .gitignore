@@ -1,3 +1,6 @@
+# Result files
+*.csv
+
 # Compiled source #
 ###################
 *.com
@@ -49,3 +52,42 @@ deps
 *.beam
 *.plt
 erl_crash.dump
+
+# Ada #
+#######
+# Object file
+*.o
+
+# Ada Library Information
+*.ali
+*.csv
+
+\.vscode/
+
+# D #
+#####
+# Compiled Object files
+*.o
+*.obj
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.a
+*.lib
+
+# Executables
+*.exe
+
+# DUB
+.dub
+docs.json
+__dummy.html
+docs/
+
+# Code coverage
+*.lst
+

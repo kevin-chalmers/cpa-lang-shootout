@@ -13,6 +13,7 @@ Information was gathered by building the closest equivalent to a release build i
 ```go build -ldflags "-s -w" <filename>```
 
 The benchmarks provided are:
+
 * [Communication Time](commstime.go)
 * [Selection Time](selecttime.go)
 * [Monte Carlo &pi;](montecarlopi.go)
@@ -45,7 +46,7 @@ The benchmarks provided are:
 
 Go provides synchronous buffered channels of size 0 as default.  To create a channel with a buffer requires a size parameter to be passed to the channel creation operation. 
 
-```
+```go
 // Normal channel creation
 var a := make(chan int)
 // Buffered creation
@@ -60,7 +61,7 @@ A channel type is provided in Go, and the channel can be typed.  Channels can be
 
 Channels in Go can be typed to communicate other channels.
 
-```
+```go
 // Create a channel to send channels.
 var a := make(chan chan int);
 // Create a normal channel and send it via the other channel.
@@ -72,7 +73,7 @@ a <- b;
 
 Selection between available channels is simple in Go.  Selection is achieved using the ```select``` statement, which acts much like a ```switch``` statement in C-like languages.
 
-```
+```go
 func do_work(in0 <-chan int, in1 <-chan int) {
     select {
         case msg := <-in0 : // do some work
@@ -85,7 +86,7 @@ func do_work(in0 <-chan int, in1 <-chan int) {
 
 Go does allow a form of indexed selection behaviour via a for loop.
 
-```
+```go
 func do_work(in []chan int) {
     for i := range in {
         select {
@@ -106,7 +107,7 @@ The ```select``` is fair in that when multiple possible channels are ready the c
 
 A timeout is available via the ```time``` package in Go.  Multiple timeouts are possible in a ```select``` block.
 
-```
+```go
 func do_work(in chan int, timeout_ms int) {
     select {
         case n := <-in : do_more_work()
@@ -119,7 +120,7 @@ func do_work(in chan int, timeout_ms int) {
 
 As Go's ```select``` is similar to a ```switch``` statement in other languages, the ```default``` keyword has been used as another selection type.
 
-```
+```go
 func do_work(in chan int) {
     select {
         case n := <-in : do_some_work()
@@ -132,7 +133,7 @@ func do_work(in chan int) {
 
 An output operation can be used within a ```select```.
 
-```
+```go
 func do_work(in <-chan int, out ->chan int, n int) {
     select {
         case n <- in : do_input_work()
@@ -145,7 +146,7 @@ func do_work(in <-chan int, out ->chan int, n int) {
 
 The ```WaitGroup``` provides multi-party synchronisation.
 
-```
+```go
 func worker(out chan int, wg WaitGroup) {
     // Do some work
     out <- result
@@ -155,4 +156,4 @@ func worker(out chan int, wg WaitGroup) {
 
 ## Compilation Process and Runtime Environment
 
-Go code is converted into binary code and can run as a standalone executable.  The Go code can also be run directly from the command line using the ```go``` command.  There is no virtual machine, and everything runs directly on the machine.
+Go code is converted into binary code and can run as a standalone executable.  The Go code can also be run directly from the command line using the ```go``` command.  There is no virtual machine, and everything runs directly on the host machine.
