@@ -36,7 +36,7 @@ The benchmarks provided are:
 | Process ownership                         | no      |
 | Selection on incoming messages            | no      |
 | Indexed selection                         | no      |
-| Selection based on incoming value         | yes     |
+| Selection based on incoming value         | partial |
 | Guarded selection                         | yes     |
 | Fair selection                            | no      |
 | Selection with timer                      | yes     |

@@ -243,25 +243,224 @@ There are a few sites which provide useful information on programming languages:
 
 The properties taken from process calculi are:
 
-* __Synchronous communication__ - do communicating components wait until they are both ready to complete a communication.
-* __First-order channels__ - does the language have a channel construct.
-* __Higher-order channels__ - can channels send channels.
-* __First-order processes__ - are processes (or threads or similar) assignable to variables.
-* __Higher-order processes__ - can processes be communicated to other processes.
-* __Parallel execution statement__ - can parallel execution be explicitly defined.
-* __Indexed parallel execution statement__ - essentially a parallel for statement.
-* __State ownership__ - does the language ensure no sharing of data between processes.
-* __Process ownership__ - when a process is created it exists and is owned within the creating context.  If the containing context ends, it must wait for any owned processes.
-* __Selection on incoming messages__ - the ability to select from a range of incoming message sources.  Requires first-order channels.
-* __Indexed selection__ - the ability to select from an array or similar range of incoming message sources via an index.  Requires first-order channels.
-* __Selection based on incoming value__ - the ability to select an incoming message based on the value in the message.
-* __Guarded selection__ - the ability activate selection choices based on a boolean condition.
-* __Fair selection__ - whether the selection can be considered fair (as far as possible).
-* __Selection with timer__ - whether some form of timing can be used during a selection.
-* __Other selection types__ - could be anything, but most likely is a default option.
-* __Selection of outgoing messages__ - as input selection, but the ability to select on output.
-* __Multi-party synchronisation__ - typically a barrier, but some object that allows more than two processes to synchronise at once.
-* __Selection on multi-party synchronisation__ - whether the multi-party synchronisation can be used in a selection.
+### Synchronous Communication
+
+Generally, process calculi work with synchronous communication - that is two or more processes must agree to communicate and do so as a single atomic operation.  For example, in CSP:
+
+```cspm
+channel a, b
+
+P = a -> b -> SKIP
+Q = b -> SKIP
+
+SYSTEM = P [{b} || {b}] Q
+```
+
+`Q` will always wait until `P` is ready to communicate via `b`, and vice-versa.  Not all languages support synchronous communication.
+
+### First-order Channels
+
+Does the language have a *channel-like* construct?  Although process calculi generally have channels for inter-process communication, not all languages do.  Typically, *actor-style* concurrent languages do not have channels.
+
+### Higher-order Channels
+
+The _&pi;_-Calculus permits channels to be sent as messages, thus reconfiguring the communication network.  For example (adapted from [Wikipedia](https://en.wikipedia.org/wiki/%CE%A0-calculus#A_small_example)):
+
+```pi
+(new x)(x<z>.0 | x(y).y<x>.x(y).0) | z(v).v<v>.0
+```
+
+`z` is communicated over channel `x` in the first step:
+
+```pi
+(new x)(0 | z<x>.x(y).0) | z(v).v<v>.0
+```
+
+`x` is communicated over channel `z` in the next step:
+
+```pi
+(new x)(0 | x(y).0) | x<x>.0
+```
+
+In the final step, `x` is communicated via channel `x`:
+
+```pi
+(new x)(0 | 0) | 0
+```
+
+If the language's channels support sending any type, this will typically include channels.
+
+### First-order Processes
+
+Assigning an *active* process to a variable is not a process calculus feature except in the *higher-order &pi;-Calculus*.  First-order processes are included for two reasons:
+
+1. Languages without channels will use a process variable to send messages to.
+2. To discuss higher-order processes below.
+
+If a process launch can be assigned to a variable, then the language supports first-order processes.  *Actor-style* concurrency requires this feature, although other languages do support it.
+
+### Higher-order Processes
+
+The *higher-order &pi;-Calculus* supports sending of process variables across a channel.  For example:
+
+```pi
+x<R>.P | x(Y).Q
+```
+
+It has been shown that in the _&pi;_-Calculus process mobility can be simulated via channel mobility.  However, the ability to send a process name is used extensively in *actor-style* concurrency to build communication networks.  Typically, if a language supports first-order processes it supports higher-order processes.
+
+### Parallel Execution Statement
+
+In process calculi, an operator defining parallel execution is normally provided.  In CSP:
+
+```cspm
+P |[{a}]| Q
+
+P ||| Q
+```
+
+In _&pi;_-Calculus:
+
+```pi
+P | Q
+```
+
+Few languages directly support a parallel execution statement.  occam is one such example:
+
+```occam
+PAR
+    P()
+    Q()
+    R()
+```
+
+### Indexed Parallel Execution Statement
+
+CSP supports a parallel execution statement:
+
+```cspm
+Q = || i : {0..10} @ [A(x)] P(x)
+```
+
+Where `A` is the alphabet of the replicated process `P`.  CSP works on *alphabetised* replication, so a set of any type can be used.
+
+Typically, such a statement is provided in a language as a `parallel for` or equivalent.
+
+### State Ownership
+
+Does the language ensure no data is shared between processes?  This is key concept in concurrency safety.  Generally, languages supporting reference passing and pointers do not promote state ownership.
+
+### Process Ownership
+
+When a process is created it exists and is owned within the creating context.  This can be tested by spawning a child process and checking if the owning process waits for child processes to complete when it ends.  In process calculi this is implicit the parallel operator must be completed before a process can continue to the next operation.
+
+### Selection on Incoming Messages
+
+A key feature of process calculi is the ability to emit behaviour based on a choice.  Process calculi may provide different mechanisms for choice.  For example, CSP specifies both internal and external choice.
+
+An example of choice in CSP is:
+
+```cspm
+channel a, b, c
+
+P = (a -> P) [] (b -> SKIP)
+Q = a -> SKIP
+R = b -> SKIP
+```
+
+When run in parallel, `P` may communicate on `a` first or `b` first.  Depending on that choice the system can deadlock.
+
+In the properties selection between incoming and outgoing messages has been seperated.  This is because many languages will support input selection, but few support output selection.  This property is met by being able to select from a range of incoming message sources.  To do so will normally require first-order channels.
+
+### Indexed Selection
+
+The ability to select from an array or similar range of incoming message sources via an index.  In CSP this is called a replicated choice (either internal or external).  For example:
+
+```cspm
+channel a, b, c
+
+P = a -> SKIP
+Q = b -> SKIP
+R = c -> SKIP
+S = [] x : {a, b, c} @ x -> S
+```
+
+`S` will select either `a`, `b`, or `c` and complete the communication with the relevant process.  It will do so three times until it deadlocks.
+
+This feature appears to be uncommon in languages.  It could be seen as an equivalant to a `select for` statement.  occam provides an `ALT FOR` statement for this purpose.
+
+### Selection Based on Incoming Value
+
+The ability to select an incoming message based on the value of the message.  In process calculi this is quite common:
+
+```cspm
+channel a : Bool
+
+P = (a.true -> P) [] (a.false -> SKIP)
+```
+
+In languages this is less common as it normally requires a read to be commited before the value is checked.  *Actor-style* concurrency does provide a partial implementation based on the message type.
+
+### Guarded Selection
+
+The ability to activate a selection choice based on a boolean condition.  In CSP:
+
+```cspm
+channel a, b
+
+P(x) = (x < 5 & a -> P(x + 1)) [] (x >= 5 & b -> SKIP)
+Q = b -> SKIP
+
+SYSTEM = P(0) [{a, b} || {b}] Q
+```
+
+While `x` is less than 5, `P` will increment `x`.  Once `x` equals 5, `P` and `Q` will sync and terminate.
+
+Some languages appear to support this feature, and it there is no consistent pattern seen yet across language types.
+
+### Fair Selection
+
+Whether the selection can be considered fair as far as possible.  Fair means that the probability of being selected is the same as other events in a selection operation over time.  This can be achieved through random selection of ready guards, or deprioritising previously selected guards.
+
+Fair selection is not a process calculi property.  As long as a choice is made when possible that is enough.  The probability of selection does not feature in the model.  However, in practice languages attempt to support fair selection to allow easier reasoning.
+
+### Selection with Timer
+
+Whether some form of timing can be used during a selection.  Process calculi incorporating time do exist (e.g. Timed CSP).  Because of this, and the prevalant use of timers in selection, timed selection has been added as a property to test for.
+
+### Other Selection Types
+
+This criteria could include anything, but typically we want a default option that allows continuation if nothing is ready to select.  In CSP, this can be modelled with SKIP:
+
+```cspm
+channel a, b
+
+P = (a -> P) [] (b -> SKIP) [] SKIP
+```
+
+Effectively we want to have a non-blocking selection option, which is a quite common design pattern.
+
+### Selection of Outgoing Messages
+
+As input selection, but the ability to select based on output messages.  At present, only Go seems to support this feature.  In process calculi there is no differentiation between input and output selction.
+
+### Multi-party Synchronisation
+
+The ability for more than two processes to syncrhonise at once.  Typically supported by a barrier, but any object that allows a group of processes to agree to synchronise.  In CSP all parties must agree to synchronise on an event for it to become ready:
+
+```cspm
+channel a, b, c, d
+
+P = a -> d -> P
+Q = d -> b -> Q
+R = c -> d -> R
+```
+
+`P`, `Q`, and `R` must agree to communicate on `d` if they are suitably composed in parallel.
+
+### Selection on Multi-party Synchronisation
+
+The ability to select on a multi-party synchronisation point.  CSP does not differentiate between event types, so a multi-party synchronisation point can be in a choice operation.  This has yet to be found in a programming language, although libraries such as JCSP do support it.
 
 ## Benchmarks
 
@@ -276,7 +475,23 @@ This benchmark measures the communication / coordination time of a message.  Fou
 * __Successor__ increments its input before output.
 * __Consumer__ times how long it takes to receive _N_ inputs.
 
-The processes are connected together to produce the natural numbers.
+The processes are connected together to produce the natural numbers.  A rough CSP equivalent is:
+
+```cspm
+channel a, b, c, d : Int
+
+ID = c?x -> a!x -> ID
+
+PREFIX(n) = a!n -> ID
+
+DELTA = a?x -> b!x -> d!x -> DELTA
+
+SUCC = b?x -> c!(x + 1) -> SUCC
+
+CONSUMER = d?x -> CONSUMER
+
+COMMSTIME = (((PREFIX(0) [{a,c} || {a,b,d}] DELTA) [{a,b,c,d} || {b,c}] SUCC) [{a,b,c,d} || {d}] CONSUMER)
+```
 
 The Communicaton Time benchmark (also referred to as commstime) was originally developed in occam by Peter Welch at the University of Kent.
 
