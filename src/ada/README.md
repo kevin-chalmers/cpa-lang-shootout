@@ -8,11 +8,58 @@
 
 Ada is an interesting language, in that it has a similar model to actors (send messages directly to tasks), yet does not use a mailbox, providing synchronous rendezvous via an interface of acceptable entries.  These entries could be considered messages in a mailbox, but there is selection based on the message type.  It appears to have channel-based language influences, but without the channels.
 
+## Criteria Mapping
+
+### Message Sending Core Language Feature
+
+Ada provides a `task` type which allows defintion of an `entry` set:
+
+```ada
+task My_Task is
+    entry In0(Value : INTEGER);
+    entry In1(Value : INTEGER);
+end My_Task;
+```
+
+Another `task` can then communicate via the `entry` interface:
+
+```ada
+task body Other_Task is
+begin
+    My_Task.In0(5);
+end Other_Task;
+```
+
+### Receiver Chooses when to Receive
+
+A receiving task uses the `accept` statement to decide when to engage in a communication:
+
+```ada
+task body My_Task is
+begin
+    accept In0(Value : INTEGER) do
+        -- use incoming value
+    end;
+end My_Task;
+```
+
+### Receiver Waits Passively
+
+A `task` will wait on the `accept` until a message is received.
+
+### Communication Made in a Single Command
+
+Both the sending of the message (invoking a call on the interface) and the receiving (performing an `accept`) are single command operations.
+
+### Messages Any Structured Data Type
+
+A `task` interface can accept any variable in an `entry`.  Also multiple values can be accepted.
+
 ## Running the Benchmarks
 
 Information was gathered via `gnatmake` with the `-O3` optimisation switch.  The command was:
 
-```gnatmake -O3 <filename>```
+`gnatmake -O3 <filename>`
 
 The benchmarks provided are:
 
