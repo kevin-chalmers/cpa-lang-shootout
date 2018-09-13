@@ -1,10 +1,58 @@
-# Ada
+# ChucK
 
 [Wikipedia Entry](https://en.wikipedia.org/wiki/ChucK)
 
 [Main Website](http://chuck.cs.princeton.edu/)
 
 ChucK is an audio production language which happens to support message passing concurrency in a limited manner.  Message passing is handled via an `Event` which can be overloaded to include parameters and hence becomes a message.  ChucK is limited insofar that a process network containing a loop is not possible, and that there is no selection operator.  Parallelism is possible by running multiple files, but it is complicated to communicate between them.
+
+## Criteria Mapping
+
+### Message Sending Core Language Feature
+
+ChucK provides an `Event` type that can be used for communication between `Shred`s.
+
+```chuck
+class Int_Chan extends Event
+{
+    int value;
+}
+
+void P(Int_Chan a)
+{
+    5 => a.value;
+    a.signal();
+}
+
+void Q(Int_Chan a)
+{
+    a => now;
+}
+
+Int_Chan a;
+spork ~ P(a);
+spork ~ Q(a);
+```
+
+### Receiver Chooses when to Receive
+
+A receiving `Shred` must decide when to receive a message by piping to `now`
+
+```ada
+a => now;
+```
+
+### Receiver Waits Passively
+
+A `Shred` will wait until a message is received when piped to `now`.
+
+### Communication Made in a Single Command
+
+ChucK stretches this definition by requiring a value to be set in the `Event` and a `yield` operation having to be used to allow the scheduler to switch tasks.  However, in principle an actual communication (via the `signal` operation) is a single command.
+
+### Messages Any Structured Data Type
+
+An overloaded `Event` can contain any data type, and multiple data types.  This includes other `Event`s and `Spork`s.
 
 ## Running the Benchmarks
 
