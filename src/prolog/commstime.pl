@@ -1,8 +1,8 @@
 commstime :-
-    message_queue_create(A),
-    message_queue_create(B),
-    message_queue_create(C),
-    message_queue_create(D),
+    message_queue_create(A, []),
+    message_queue_create(B, []),
+    message_queue_create(C, []),
+    message_queue_create(D, []),
     thread_create(prefix(0, C, A), _, []),
     thread_create(delta(A, B, D), _, []),
     thread_create(succ(B, C), _, []),
