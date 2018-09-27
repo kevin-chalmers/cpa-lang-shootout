@@ -133,7 +133,6 @@ If you want to help, feel free to pull the repository, implement the benchmarks,
 * [Sequoia++](https://web.stanford.edu/group/sequoia/)
 * [SIGNAL](https://en.wikipedia.org/wiki/SIGNAL_(programming_language)) - may be stretching the definition.  Also tricky to find.  Try [The Polychrony Toolset](http://www.irisa.fr/espresso/Polychrony/).
 * [SISAL](https://en.wikipedia.org/wiki/SISAL) - think this is unavailable.  Try [here](https://sourceforge.net/projects/sisal/).
-* [Smalltalk](https://en.wikipedia.org/wiki/Smalltalk) - instructions available [here](http://smalltalk.org/).
 * [SpecC](https://en.wikipedia.org/wiki/SpecC) - a reference compiler can be found via [here](http://www.cecs.uci.edu/~specc/).
 * [SR](https://en.wikipedia.org/wiki/SR_(programming_language)) - looks like it is no longer maintained.  Try [here](https://www2.cs.arizona.edu/sr/).
 * [Standard ML](https://en.wikipedia.org/wiki/Standard_ML) - but most likely [ConcurrentML](https://en.wikipedia.org/wiki/Concurrent_ML).  Try [here](http://cml.cs.uchicago.edu/).
@@ -156,7 +155,7 @@ Not all of these languages may support message-passing concurrency, as only a qu
 Language selection criteria:
 
 1. the language __must__ provide mechanisms to send a message between components as part of the core language features (e.g., keyword support and/or standard library) and not via an additional library.
-2. the message must be sent in a manner so that the receiver can __choose__ when to receive it; therefore, giving the receiver control over its internal state.  A method invocation on an object is therefore not a message.
+2. the message must be sent in a manner so that the receiver can __choose__ when to receive it; therefore, giving the receiver control over its internal state.  A method invocation on an object is therefore not a message.  This criteria implies a receiver has some thread of execution independant to the sender.
 3. the receiver __must__ be able to wait __passively__ for a message to be received - that is, a busy spinning on a value to change is not a message.  Having a queue between threads that a receiver tests for readiness is not suitable.
 4. a communication __must__ be made using a single command, i.e., language keyword or standard library call.  A slight concesion is made for *yielding* due to the use of coroutine approaches that often require an explicit `yield` statement, and languages that may define a communication in some form of block statement.  This is to keep in the spirit of a message-pass being a single operation.
 5. messages __must__ be any structured data type supported in the language.  Conversion to bytes, strings, or another data serialization technique is __not__ considered message-passing.  Nor is any use of I/O mechanisms to simulate communication.
@@ -177,12 +176,13 @@ For various reasons, some languages originally considered for the study have bee
 * [C&omega;](https://en.wikipedia.org/wiki/C%CF%89) - Microsoft Research [page](https://www.microsoft.com/en-us/research/project/comega/?from=http%3A%2F%2Fresearch.microsoft.com%2Fcomega%2F).  Might not be suitable.  After some investigation, C&omega; became the [Joins Concurrency Library](https://en.wikipedia.org/wiki/Joins_(concurrency_library)) for .NET, although this is not a standard library and therefore does not meet the criteria.  A C&omega; compiler can be downloaded, but it requires .NET 1.1, which is no longer supported.  Thus, C&omega; has been discounted from the list.
 * [Clojure](https://en.wikipedia.org/wiki/Clojure) - instructions available [here](https://clojure.org/).  At present this does not seem to meet the criteria.  The `agents` package provides simple agents that respond to function calls but have no control over their state.  The `core.async` package does provide the functionality, but it is not core Clojure and therefore does not meet criteria 1.
 * [Concurrent Pascal](https://en.wikipedia.org/wiki/Concurrent_Pascal) - although it might be a stretch saying this is live.  A compiler for microcontrollers is available [here](https://github.com/dhawk/concurrent-pascal-compiler).  After some investigation it appears that Concurrent Pascal is not available.  No version exists that can be executed on a Linux desktop.
+* [Smalltalk](https://en.wikipedia.org/wiki/Smalltalk).  Smalltalk's concurrency support is limited to forking processes and a semaphore for synchronisation.  As such, it does not meet the criteria for message passing.
 
 ## Language Timeline
 
 This section indicates when languages where released.  The aim is to illustrate any clusters of development.
 
-1972. (2) Prolog, Smalltalk
+1972. (2) Prolog
 1973. (1) Standard ML (as ML)
 1974. (0)
 1975. (0)
