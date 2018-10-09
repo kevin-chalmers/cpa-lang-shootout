@@ -1,1 +1,1 @@
-Need to work out how to load CML in SML/NJ.
+Install SMLNJ from source.
