@@ -102,6 +102,7 @@ If you want to help, feel free to pull the repository, implement the benchmarks,
 * [Limbo](https://en.wikipedia.org/wiki/Limbo_(programming_language)) - instructions available [here](http://www.vitanuova.com/inferno/limbo.html).
 * [Logtalk](https://en.wikipedia.org/wiki/Logtalk) - instructions available [here](https://logtalk.org/).
 * [Lua](https://en.wikipedia.org/wiki/Lua_(programming_language)) - instructions available [here](https://www.lua.org/).
+* [Manticore](http://manticore.cs.uchicago.edu/).
 * [Mercury](https://en.wikipedia.org/wiki/Mercury_(programming_language)) - instructions available [here](http://www.mercurylang.org/).
 * [MPD](https://en.wikipedia.org/wiki/MPD_(programming_language)) - instructions available [here](https://www2.cs.arizona.edu/mpd/).
 * [Mythryl](https://mythryl.org/index3.html)
@@ -217,7 +218,7 @@ This section indicates when languages where released.  The aim is to illustrate 
 2004. (1) Scala
 2005. (3) F#, Neko, XC
 2006. (1) Sequoia++
-2007. (1) Dodo
+2007. (1) Dodo, Manticore
 2008. (2) Nim, PREESM
 2009. (3) Clump, Go, ProcessJ
 2010. (2) Fancy, Rust
