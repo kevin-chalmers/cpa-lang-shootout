@@ -30,6 +30,7 @@ struct
 
     fun print(input) =
         (TextIO.print(Int.toString(recv input));
+        TextIO.print(Time.toString(Time.now()));
         TextIO.print("\n");
         print(input))
 
