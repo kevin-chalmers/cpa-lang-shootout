@@ -1,6 +1,12 @@
 structure CommsTime =
 struct
     open CML
+    val zeroTime = {usr = Time.zeroTime, sys = Time.zeroTime}
+    val dummyTimer = Timer.totalRealTimer()
+
+    val time = ref zeroTime
+    val time' = ref zeroTime
+    val timer = ref dummyTimer
 
     fun id(input, output, count) =
         if count > 0 then
@@ -42,21 +48,30 @@ struct
 
     fun save_results((v::results), file) =
         (TextIO.output(file, Int.toString(v));
-        TextIO.output(results, "\n");
+        TextIO.output(file, "\n");
         save_results(results, file))
 
-    fun print(input, count, start, results) =
+    fun print(input, count, start : Time.time, results) =
         if count mod 10000 = 0 then
             let
                 val total = Time.now() - start
             in
-                if count > 0 ###### work here
-            
-
-        (TextIO.print(Int.toString(recv input));
-        TextIO.print(Time.toString(Time.now()));
-        TextIO.print("\n");
-        print(input))
+                if count > 0 then
+                    let
+                        val new_start = Time.now()
+                    in
+                        print(input, count - 1, new_start, total::results)
+                    end
+                else
+                    let
+                        val f = TextIO.openOut("ct-cml.csv")
+                    in
+                        save_results(results, f)
+                    end
+            end
+        else
+            (recv input;
+            print(input, count - 1, start, results))
 
     fun commstime() =
         let
