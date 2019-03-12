@@ -2,5 +2,5 @@
 
 cd src
 for dir in */ ; do
-    docker build -t $dir $dir
+    docker build $dir
 done
