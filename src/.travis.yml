@@ -1,7 +1,5 @@
 language: c
 
 script:
-- for dir in */ ; do
-    echo "$dir"
-  done
+- ./build.sh
 
