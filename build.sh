@@ -2,5 +2,8 @@
 
 cd src
 for dir in */ ; do
-    docker build -t ${dir%*/} $dir
+    if [-e "$dir/Dockerfile"] then
+        echo "Building ${dir%*/}"
+        docker build -t ${dir%*/} $dir
+    fi
 done
