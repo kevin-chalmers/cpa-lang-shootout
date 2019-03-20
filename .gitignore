@@ -91,3 +91,7 @@ docs/
 # Code coverage
 *.lst
 
+
+src/cml/\.cm/GUID/
+
+src/cml/\.cm/SKEL/
