@@ -102,6 +102,7 @@ If you want to help, feel free to pull the repository, implement the benchmarks,
 * [Limbo](https://en.wikipedia.org/wiki/Limbo_(programming_language)) - instructions available [here](http://www.vitanuova.com/inferno/limbo.html).
 * [Logtalk](https://en.wikipedia.org/wiki/Logtalk) - instructions available [here](https://logtalk.org/).
 * [Lua](https://en.wikipedia.org/wiki/Lua_(programming_language)) - instructions available [here](https://www.lua.org/).
+* [Manticore](http://manticore.cs.uchicago.edu/).
 * [Mercury](https://en.wikipedia.org/wiki/Mercury_(programming_language)) - instructions available [here](http://www.mercurylang.org/).
 * [MPD](https://en.wikipedia.org/wiki/MPD_(programming_language)) - instructions available [here](https://www2.cs.arizona.edu/mpd/).
 * [Mythryl](https://mythryl.org/index3.html)
@@ -175,7 +176,7 @@ For various reasons, some languages originally considered for the study have bee
 * [C=](http://www.hoopoesnest.com/cstripes/cstripes-sketch.htm) - although unsure how easy it is to communicate between concurrent components.  Appears to be unavailable now.
 * [C&omega;](https://en.wikipedia.org/wiki/C%CF%89) - Microsoft Research [page](https://www.microsoft.com/en-us/research/project/comega/?from=http%3A%2F%2Fresearch.microsoft.com%2Fcomega%2F).  Might not be suitable.  After some investigation, C&omega; became the [Joins Concurrency Library](https://en.wikipedia.org/wiki/Joins_(concurrency_library)) for .NET, although this is not a standard library and therefore does not meet the criteria.  A C&omega; compiler can be downloaded, but it requires .NET 1.1, which is no longer supported.  Thus, C&omega; has been discounted from the list.
 * [Clojure](https://en.wikipedia.org/wiki/Clojure) - instructions available [here](https://clojure.org/).  At present this does not seem to meet the criteria.  The `agents` package provides simple agents that respond to function calls but have no control over their state.  The `core.async` package does provide the functionality, but it is not core Clojure and therefore does not meet criteria 1.
-* [Concurrent Pascal](https://en.wikipedia.org/wiki/Concurrent_Pascal) - although it might be a stretch saying this is live.  A compiler for microcontrollers is available [here](https://github.com/dhawk/concurrent-pascal-compiler).  After some investigation it appears that Concurrent Pascal is not available.  No version exists that can be executed on a Linux desktop.
+* [Concurrent Pascal](https://en.wikipedia.org/wiki/Concurrent_Pascal) - although it might be a stretch saying this is live.  A compiler for microcontrollers is available [here](https://github.com/dhawk/concurrent-pascal-compiler).  After some investigation it appears that Concurrent Pascal is not available.  No version exists that can be executed on Linux.
 * [Smalltalk](https://en.wikipedia.org/wiki/Smalltalk).  Smalltalk's concurrency support is limited to forking processes and a semaphore for synchronisation.  As such, it does not meet the criteria for message passing.
 
 ## Language Timeline
@@ -217,7 +218,7 @@ This section indicates when languages where released.  The aim is to illustrate 
 2004. (1) Scala
 2005. (3) F#, Neko, XC
 2006. (1) Sequoia++
-2007. (1) Dodo
+2007. (1) Dodo, Manticore
 2008. (2) Nim, PREESM
 2009. (3) Clump, Go, ProcessJ
 2010. (2) Fancy, Rust
