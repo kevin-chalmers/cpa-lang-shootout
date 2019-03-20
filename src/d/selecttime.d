@@ -39,7 +39,7 @@ void reader(int writers)
         writeln(results[i]);
         sw.reset();
     }
-    string str = format("st-d-%s.csv", writers);
+    string str = format("results/st-d-%s.csv", writers);
     File file = File(str, "w");
     for (int i = 0; i < ITERATIONS / ITERATIONS_EXPERIMENT; ++i)
     {

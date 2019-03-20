@@ -36,7 +36,7 @@ task body Reader is
     Results : File_Type;
     i : INTEGER := 0;
 begin
-    Create(File => Results, Mode => Out_File, Name => "st-ada-" & Integer'Image(writers) & ".csv");
+    Create(File => Results, Mode => Out_File, Name => "results/st-ada-" & Integer'Image(writers) & ".csv");
     Start := Clock;
     for count in 1..Iterations loop
         if count mod 65536 = 0 then

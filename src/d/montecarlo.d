@@ -43,7 +43,7 @@ void master(int workers)
         results[i] = sw.peek.total!"nsecs";
         writeln(format("%s in %sns", total_pi, results[i]));
     }
-    File file = File(format("mcp-d-%s.csv", workers), "w");
+    File file = File(format("results/mcp-d-%s.csv", workers), "w");
     for (int i = 0; i < EXPERIMENTS; ++i)
     {
         file.writeln(results[i]);

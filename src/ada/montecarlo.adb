@@ -22,7 +22,7 @@ procedure MonteCarloPi is
       Results : File_Type;
       Total_Pi : Float;
    begin
-      Create(File => Results, Mode => Out_File, Name => "mcp-ada-" & Integer'Image(workers) & ".csv");
+      Create(File => Results, Mode => Out_File, Name => "results/mcp-ada-" & Integer'Image(workers) & ".csv");
       Start := Clock;
       for i in 1..EXPERIMENTS loop
          Total_Pi := 0.0;

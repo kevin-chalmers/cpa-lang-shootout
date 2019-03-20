@@ -70,7 +70,7 @@ void printer()
         results[i] = sw.peek.total!"nsecs" / ITERATIONS_EXPERIMENT;
         writeln(results[i]);
     }
-    File file = File("ct-d.csv", "w");
+    File file = File("results/ct-d.csv", "w");
     for (int i = 0; i < EXPERIMENTS; ++i)
     {
         file.writeln(results[i]);

@@ -82,7 +82,7 @@ task body PRINTER is
     Total : Time_Span;
     Results : File_Type;
 begin
-    Create(File => Results, Mode => Out_File, Name => "commstime_ada.csv");
+    Create(File => Results, Mode => Out_File, Name => "ct_ada.csv");
     for i in 0..Experiments loop
         Start := Clock;
         for j in 0..Iterations_Experiment loop
